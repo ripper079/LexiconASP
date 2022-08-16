@@ -18,29 +18,36 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+//Route to doctor
+app.MapControllerRoute(
+    name: "FeverCheck",
+    pattern: "FeverCheck",
+    defaults: new { controller = "Doctor", action = "FeverCheck" });
+
 //Nr 2
-app.MapControllerRoute(
-    name: "test",
-    pattern: "test123",    
-    defaults: new {controller = "Home", action = "Test"});
+//app.MapControllerRoute(
+//    name: "test",
+//    pattern: "test123",    //URL match
+//    defaults: new {controller = "Home", action = "Test"});
 
-// About Me route
-app.MapControllerRoute(
-    name: "aboutme",
-    pattern: "aboutme",
-    defaults: new { controller = "Home", action = "Aboutmeperson" });
+//// About Me route
+//app.MapControllerRoute(
+//    name: "aboutme",
+//    pattern: "aboutme",
+//    defaults: new { controller = "Home", action = "Aboutmeperson" });
 
-//Contact route
-app.MapControllerRoute(
-    name: "contact",
-    pattern: "contact",
-    defaults: new { controller = "Home", action = "ContactMe" });
+////Contact route
+//app.MapControllerRoute(
+//    name: "contact",
+//    pattern: "contact",
+//    defaults: new { controller = "Home", action = "ContactMe" });
 
-//Project route
-app.MapControllerRoute(
-    name: "project",
-    pattern: "project",
-    defaults: new { controller = "Home", action = "MyProjects" });
+////Project route
+//app.MapControllerRoute(
+//    name: "project",
+//    pattern: "project",
+//    defaults: new { controller = "Home", action = "MyProjects" });
+
 
 //Project route
 

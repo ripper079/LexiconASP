@@ -67,3 +67,9 @@ body > footer {
     margin-bottom: 20px;
 }
 
+
+
+form {
+    padding: 10px;
+    border: 1px orange solid;
+}

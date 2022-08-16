@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "FeverCheck";
+}
+
+<p>An apple a day keep the doctors away</p>
+<p>An apple a day keep the doctors away</p>
+<p>An apple a day keep the doctors away</p>
+<p>Value received from doctor controller @ViewBag.danielvalue</p>
+
+
+<form id="inserttemp-form">
+    <h2>Insert your temperature</h2>
+    <h4>[Form]</h4>
+    <p>
+        <label>Celcius<input type="radio" name="temperatureunit" value="celcius" /></label>
+        <label>Farenheit<input type="radio" name="temperatureunit" value="farenheit" /></label>
+    </p>
+    <p>
+        <label>What is your temperature: <input type="number" /></label>    
+    </p>
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+    
+
+</form>
