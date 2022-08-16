@@ -3,11 +3,44 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/style.css">
     <title>@ViewBag.Title</title>
 </head>
 <body>
+
+    @*Added lines*@
+    <header>
+        <h1>Logo</h1>                 
+        <nav>
+            <ul>
+                <li>
+                    <a asp-controller="Home" asp-action="Aboutmeperson">Everything about me</a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="ContactMe">How to contact me</a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="MyProjects">All my projects</a>
+                </li>
+            </ul>
+        </nav>           
+    </header>
+
+
     <div>
+        <p><strong>Start </strong> - Common code in _Layout.cshtml</p>
+        
+        
         @RenderBody()
+
+        @* Code code code *@
+
+        
+        <p><strong>End </strong> - Common code in _Layout.cshtml</p>
+        
     </div>
+
 </body>
+
+<footer>&copy; Daniel Oikarainen - This page was generated @DateTime.Now.ToString("yyyy/MM/dd")</footer>
 </html>

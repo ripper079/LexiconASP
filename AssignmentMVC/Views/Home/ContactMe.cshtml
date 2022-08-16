@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "ContactMe";
+    
+    string myFirstName = "Daniel";
+    string myLastName = "Oikarainen";
+}
+
+<p>Contact information</p>
+
+<ul id="personal-info">
+    <li>Daniel Oikarainen</li>
+    <li>Lindormsgatan 17</li>
+    <li>506 44 Borås</li>
+    <li>@(myFirstName.ToLower() + "@" + myLastName.ToLower() + ".se")</li>    
+</ul>

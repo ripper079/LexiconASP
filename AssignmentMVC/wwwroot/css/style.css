@@ -1,0 +1,69 @@
+/* ------                GLOBAL setttings              ----- */
+:root {
+	
+    /* Color variables */
+
+
+    /* Main */
+    --main-bakground-color: #FED966;    
+
+    /*Green */
+    --hover-color: #00FF00;
+
+}
+
+/* Re-setting all elements */
+* {
+    box-sizing: border-box;    
+	padding: 0;
+	margin: 0;
+	font-family: monospace; 
+}
+
+/* Top row navigation settings */
+body > header {
+    border: 2px green solid;
+    margin-bottom: 20px;       
+}
+
+/* Remove bullets from links */
+nav ul {
+    list-style: none;
+}
+
+/* Make them in a row */
+nav ul li {
+    display: inline-block;    
+}
+
+/* Removes underline in each link item */
+nav ul li a {
+    text-decoration: none;
+}
+
+/*Hover effect on links */
+nav ul li a:hover {
+    color: var(--hover-color);
+}
+
+
+/*Set list so they appear in a row insteed */
+/*Push logo to the right and listitem to the right */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Main middle content */
+body > div {
+    border: 2px red dotted;
+    margin-bottom: 20px;
+}
+
+/* Footer  */
+body > footer {
+    border: 1px blue solid;
+    margin-bottom: 20px;
+}
+

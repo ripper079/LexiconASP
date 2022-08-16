@@ -21,11 +21,32 @@ app.MapControllerRoute(
 //Nr 2
 app.MapControllerRoute(
     name: "test",
-    pattern: "test",
+    pattern: "test123",    
     defaults: new {controller = "Home", action = "Test"});
 
-//Pattern property: How URL should look in the browsern
+// About Me route
+app.MapControllerRoute(
+    name: "aboutme",
+    pattern: "aboutme",
+    defaults: new { controller = "Home", action = "Aboutmeperson" });
 
+//Contact route
+app.MapControllerRoute(
+    name: "contact",
+    pattern: "contact",
+    defaults: new { controller = "Home", action = "ContactMe" });
+
+//Project route
+app.MapControllerRoute(
+    name: "project",
+    pattern: "project",
+    defaults: new { controller = "Home", action = "MyProjects" });
+
+//Project route
+
+
+//Pattern property: How URL should look in the browsern
+//action = the value MUST match method name in HomeController
 
 
 app.Run();

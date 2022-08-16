@@ -13,5 +13,21 @@ namespace AssignmentMVC.Controllers
         {
             return View();
         }
+
+        public IActionResult Aboutmeperson()
+        {
+            return View();
+        }
+
+        public IActionResult ContactMe()
+        {
+            return View();
+        }
+
+        public IActionResult MyProjects()
+        {
+            return View();
+        }
+
     }
 }
