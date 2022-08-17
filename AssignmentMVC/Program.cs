@@ -4,18 +4,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 
 //Enable Session support - Step 1
-//builder.Services.AddSession(options => 
-//{
-//    options.IdleTimeout = TimeSpan.FromMinutes(10);
-//});
+//Active in 20 minutes
+builder.Services.AddSession(options => 
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(15);
+});
 
 
 
 //The app
 var app = builder.Build();
 
-//Enable session Step 2 (30 min default session time)
-//app.UseSession();
+//Enable session - Step 2 (30 min default session time)
+app.UseSession();
 
 //Get access to static files
 app.UseStaticFiles();
@@ -34,5 +35,11 @@ app.MapControllerRoute(
     name: "FeverCheck",
     pattern: "FeverCheck",
     defaults: new { controller = "Doctor", action = "FeverCheck" });
+
+//Route to Guessing game
+app.MapControllerRoute(
+    name: "GuessingGame",
+    pattern: "GuessingGame",
+    defaults: new { controller = "Home", action = "GuessingGame" });
 
 app.Run();

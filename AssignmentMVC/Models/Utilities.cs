@@ -22,9 +22,12 @@
             }
 
             return healthStatusTemp;
+        }
 
-
-
+        //Generate a number between 1 and 100
+        public static int GenerateSecretNumber() 
+        {
+            return new Random().Next(1, 101);
         }
     }
 }
