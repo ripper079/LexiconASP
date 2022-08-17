@@ -3,8 +3,19 @@ var builder = WebApplication.CreateBuilder(args);
 //Service mvc working
 builder.Services.AddMvc();
 
+//Enable Session support - Step 1
+//builder.Services.AddSession(options => 
+//{
+//    options.IdleTimeout = TimeSpan.FromMinutes(10);
+//});
+
+
+
 //The app
 var app = builder.Build();
+
+//Enable session Step 2 (30 min default session time)
+//app.UseSession();
 
 //Get access to static files
 app.UseStaticFiles();
@@ -23,37 +34,5 @@ app.MapControllerRoute(
     name: "FeverCheck",
     pattern: "FeverCheck",
     defaults: new { controller = "Doctor", action = "FeverCheck" });
-
-//Nr 2
-//app.MapControllerRoute(
-//    name: "test",
-//    pattern: "test123",    //URL match
-//    defaults: new {controller = "Home", action = "Test"});
-
-//// About Me route
-//app.MapControllerRoute(
-//    name: "aboutme",
-//    pattern: "aboutme",
-//    defaults: new { controller = "Home", action = "Aboutmeperson" });
-
-////Contact route
-//app.MapControllerRoute(
-//    name: "contact",
-//    pattern: "contact",
-//    defaults: new { controller = "Home", action = "ContactMe" });
-
-////Project route
-//app.MapControllerRoute(
-//    name: "project",
-//    pattern: "project",
-//    defaults: new { controller = "Home", action = "MyProjects" });
-
-
-//Project route
-
-
-//Pattern property: How URL should look in the browsern
-//action = the value MUST match method name in HomeController
-
 
 app.Run();

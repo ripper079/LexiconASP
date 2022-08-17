@@ -4,6 +4,8 @@ namespace AssignmentMVC.Controllers
 {
     public class DoctorController : Controller
     {
+
+        //GET by default
         public IActionResult Index()
         {
             return View();
@@ -11,20 +13,23 @@ namespace AssignmentMVC.Controllers
 
         public IActionResult FeverCheck()
         {
-
-            ViewBag.danielvalue = 67.33;
-
             return View();
-
-        }
+        }        
 
         [HttpPost]
-        public IActionResult FeverCheck(double temperatureunit)
+        public IActionResult FeverCheck(int? humantemperature, string temperatureunit)
         {
-            ViewBag.danielvalue = temperatureunit;
+
+            //Get temp in Celcius
+            if (humantemperature != null) 
+            {
+                ViewBag.patient = AssignmentMVC.Models.Utilities.GetTemperatureStatusInCelsius(humantemperature);
+            }
+            
 
             return View();
 
         }
+
     }
 }
