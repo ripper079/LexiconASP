@@ -8,7 +8,6 @@
 </head>
 <body>
 
-    @*Added lines*@
     <header>
         <h1>Logo</h1>                 
         <nav>
@@ -25,6 +24,9 @@
                 <li>
                     <a asp-controller="Doctor" asp-action="FeverCheck">FeverCheck</a>
                 </li>
+                <li>
+                    <a asp-controller="Home" asp-action="GuessingGame">Guessing GAME</a>
+                </li>
             </ul>
         </nav>           
     </header>
@@ -32,12 +34,8 @@
 
     <div>
         <p><strong>Start </strong> - Common code in _Layout.cshtml</p>
-        
-        
+                
         @RenderBody()
-
-        @* Code code code *@
-
         
         <p><strong>End </strong> - Common code in _Layout.cshtml</p>
         

@@ -4,18 +4,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 
 //Enable Session support - Step 1
-//Active in 20 minutes
 builder.Services.AddSession(options => 
 {
     options.IdleTimeout = TimeSpan.FromMinutes(15);
 });
 
 
-
 //The app
 var app = builder.Build();
 
-//Enable session - Step 2 (30 min default session time)
+//Enable session - Step 2
 app.UseSession();
 
 //Get access to static files
