@@ -24,23 +24,28 @@
 </table>
 
 
-</table>*@
-
-<form asp-controller="Person" asp-action="InputPerson" method="post">
+<form asp-controller="Person" asp-action="Person" method="post">
     <h2>Add a Person</h2>
     <p>
-        <label>Name: <input type="text" placeholder="Your name" /></label>
+        <label>Name: <input type="text" name="FullName" placeholder="Your name" /></label>
     </p>
     <p>
-        <label>Phonenumber: <input type="text" placeholder="Your phonennumber" /></label>
+        <label>Phonenumber: <input type="text" name="PhoneNumber" placeholder="Your phonennumber" /></label>
     </p>
     <p>
-        <label>City: <input type="text" placeholder="City name" /></label>
+        <label>City: <input type="text" name="City" placeholder="City name" /></label>
     </p>
     <p>
         <button type="submit" value="Create">Add Person</button>
     </p>
 </form>
 
+@*<form asp-controller="Person" asp-action="AddPerson" method="post">
+    FullName:  <input asp-for="FullName" /> <br />
+    PhoneNumber: <input asp-for="PhoneNumber" /><br />
+    City: <input asp-for="City" /><br />
+    <button type="submit">Register</button>
+</form>
+*@
 
 <h4><strong>End</strong> Person.cshtml</h4>

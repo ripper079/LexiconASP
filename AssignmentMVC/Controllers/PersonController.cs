@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AssignmentMVC.Models;
 
-//AssignmentMVC.Models
-
 namespace AssignmentMVC.Controllers
 {
     public class PersonController : Controller
@@ -18,6 +16,14 @@ namespace AssignmentMVC.Controllers
             PeopleViewModel myPeopleView = new PeopleViewModel();
 
             return View(myPeopleView);           
-        }        
+        }
+
+        [HttpPost]
+        public IActionResult Person(PeopleViewModel model)
+        {
+            model.City
+
+            return View();
+        }
     }
 }

@@ -5,6 +5,10 @@ namespace AssignmentMVC.Models
     public class PeopleViewModel
     {
         public List<Person> listOfPersons;
+        public string FullName { get; set; }
+        public string City { get; set; }
+        public string PhoneNumber { get; set; }
+        /*public Person person = new Person("foo", "foo2", "foo3");*/
 
         public PeopleViewModel() 
         {
