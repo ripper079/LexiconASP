@@ -73,3 +73,8 @@ form {
     padding: 10px;
     border: 1px orange solid;
 }
+
+/* Table decoration - lol */
+table {
+    border: 1px pink solid;
+}

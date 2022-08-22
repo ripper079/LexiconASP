@@ -1,0 +1,46 @@
+﻿@model AssignmentMVC.Models.PeopleViewModel;
+
+@{
+    ViewData["Title"] = "Person";
+}
+
+<h4><strong>Start</strong> Person.cshtml</h4>
+
+
+<table>
+    <tr>
+        <th>FullName</th>
+        <th>Phone Number</th>
+        <th>City</th>
+    </tr>
+@foreach (var item in Model.listOfPersons)
+{
+    <tr>
+        <td>@item.FullName</td>
+        <td>@item.PhoneNumber</td>
+        <td>@item.City</td>
+    </tr>    
+}
+</table>
+
+
+</table>*@
+
+<form asp-controller="Person" asp-action="InputPerson" method="post">
+    <h2>Add a Person</h2>
+    <p>
+        <label>Name: <input type="text" placeholder="Your name" /></label>
+    </p>
+    <p>
+        <label>Phonenumber: <input type="text" placeholder="Your phonennumber" /></label>
+    </p>
+    <p>
+        <label>City: <input type="text" placeholder="City name" /></label>
+    </p>
+    <p>
+        <button type="submit" value="Create">Add Person</button>
+    </p>
+</form>
+
+
+<h4><strong>End</strong> Person.cshtml</h4>
