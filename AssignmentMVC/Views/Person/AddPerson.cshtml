@@ -1,0 +1,15 @@
+﻿@model AssignmentMVC.Models.Person;
+
+@{
+    ViewData["Title"] = "AddPerson";
+}
+
+<h1>AddPerson</h1>
+
+<form asp-controller="Person" asp-action="AddPerson" method="post" role="form">
+    <label asp-for="FullName" class="form-label"></label>
+    <input asp-for="FullName" class="form-control"/>
+    <button type="submit">Add Person</button>
+</form>
+
+

@@ -76,5 +76,32 @@ form {
 
 /* Table decoration - lol */
 table {
-    border: 1px pink solid;
+    /*border: 1px pink solid;*/
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    text-align: center;
+}
+
+
+table th {
+    /* Set common color*/
+    background-color: #96858F;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+table td {
+    padding: 5px 30px;
+}
+
+table tbody tr:nth-child(odd) {
+    /* Set common color*/
+    background-color: #6D7993;
+}
+
+table tbody tr:nth-child(even) {
+    /* Set common color*/
+    background-color: #9099A2;
 }

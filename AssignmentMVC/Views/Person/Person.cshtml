@@ -6,24 +6,114 @@
 
 <h4><strong>Start</strong> Person.cshtml</h4>
 
+<form asp-controller="Person" asp-action="Filter" method="post">
+    <h2>Filters the Person list - Dangerous [Removes Content from view model]</h2>
+    <h3>If field is empty, it is excluded from filtering</h3>
+    <p>
+        <label>By Full name: <input type="text" name="filterbyfullname" placeholder="Full name" /></label>
+        <label>By Phone Number: <input type="text" name="filterbyphonenumber" placeholder="Phone Number" /></label>
+        <label>By City: <input type="text" name="filterbycity" placeholder="City" /></label>
+    </p>
+
+    <button type="submit">Filter the list</button>
+</form>
 
 <table>
     <tr>
+        <th>Id number</th>
         <th>FullName</th>
         <th>Phone Number</th>
         <th>City</th>
+        <th>Delete</th>
     </tr>
 @foreach (var item in Model.listOfPersons)
 {
     <tr>
+        <td>@item.IdPerson</td>
         <td>@item.FullName</td>
         <td>@item.PhoneNumber</td>
         <td>@item.City</td>
+        <td><a asp-controller="Person" asp-action="RemovePerson" asp-route-id="@item.IdPerson">Remove - @item.IdPerson</a></td>
     </tr>    
 }
 </table>
 
 
+
+
+<form asp-controller="Person" asp-action="Person" method="post">
+    <h2>Add a Person</h2>
+    <p>
+        <label>Full name: <input type="text" name="fullname" placeholder="Your Full name" /></label>
+  
+        <label>Phonenumber: <input type="text" name="phonenumber" placeholder="Your phonennumber" /></label>
+   
+        <label>City: <input type="text" name="city" placeholder="City name" /></label>
+    </p>
+    <p>
+        @*<button type="submit" value="Create">Add Person</button>*@
+        <button type="submit">Add a Person to the list</button>
+    </p>
+</form>
+
+@*
+<form asp-controller="Person" asp-action="RemovePerson" method="post">
+    <h2>Remove a Person by id - Debugging help</h2>
+    <p>
+        <label>Id of person: <input type="number" name="id" placeholder="Id number" /></label>
+    </p>
+    <p>
+        <button type="submit" value="Create">Remove Person</button>
+    </p>
+</form>
+
+*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
 <form asp-controller="Person" asp-action="Person" method="post">
     <h2>Add a Person</h2>
     <p>
@@ -38,13 +128,10 @@
     <p>
         <button type="submit" value="Create">Add Person</button>
     </p>
-</form>
+</form>*@
 
-@*<form asp-controller="Person" asp-action="AddPerson" method="post">
-    FullName:  <input asp-for="FullName" /> <br />
-    PhoneNumber: <input asp-for="PhoneNumber" /><br />
-    City: <input asp-for="City" /><br />
-    <button type="submit">Register</button>
+@*<form asp-controller="Person" asp-action="AddPerson" method="post" role="form">
+    <label asp-for="">
 </form>
 *@
 
