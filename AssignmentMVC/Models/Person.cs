@@ -4,8 +4,6 @@ namespace AssignmentMVC.Models
 {
     public class Person
     {
-        private static int countPersonCreated = 0;
-
         public int IdPerson { get; set; }
 
         public string FullName { get; set; }
@@ -16,11 +14,6 @@ namespace AssignmentMVC.Models
         public override string ToString()
         {
             return $"[{FullName}] | [{PhoneNumber}] | [{City}]";
-        }
-
-        public static int GenerateIdNumberForPerson() 
-        {
-            return ++countPersonCreated;
-        }
+        } 
     }
 }

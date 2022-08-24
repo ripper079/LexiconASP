@@ -6,6 +6,7 @@ namespace AssignmentMVC.Controllers
     public class PersonController : Controller
     {
         public static PeopleViewModel myPeopleView = new PeopleViewModel();
+        public static int IDForPeople = 100;
 
         public IActionResult Index()
         {
@@ -15,14 +16,20 @@ namespace AssignmentMVC.Controllers
         [HttpGet]
         public IActionResult Person()
         {
-
             return View(myPeopleView);           
         }
 
+        //Adds (if possible) a person
         [HttpPost]
-        public IActionResult Person(string fullname, string phonenumber, string city)
+        public IActionResult Person(PeopleViewModel pPeopleViewModel)
         {
-            myPeopleView.addPersonToList(fullname, phonenumber, city );
+            if (ModelState.IsValid) 
+            {
+                myPeopleView.addPersonToList(
+                    pPeopleViewModel.cpvm.FullName, pPeopleViewModel.cpvm.PhoneNumber, pPeopleViewModel.cpvm.City, IDForPeople++
+                );
+            }
+            
             return View(myPeopleView);
         }
        
@@ -33,16 +40,28 @@ namespace AssignmentMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Filter(string filterbyfullname, string filterbyphonenumber, string filterbycity) 
+        public IActionResult Filter(string filtertext) 
         {
-            if (ModelState.IsValid) 
+            //Restore original viewmodel
+            if (string.IsNullOrEmpty(filtertext))
             {
-
+                return View("Person", myPeopleView);
             }
 
-            myPeopleView.filterList(filterbyfullname, filterbyphonenumber, filterbycity);
-            return View("Person", myPeopleView);
+            //Create a filtered list based original viewmodel
+            var filteredPeople = myPeopleView.listOfPersons.Where
+                (x => x.FullName == filtertext || x.City == filtertext).ToList();
+
+            //Create a new filtered viewmodel
+            var filteredViewModel = new PeopleViewModel();
+            //Set the filtered view 
+            filteredViewModel.listOfPersons = filteredPeople;
+
+
+            return View("Person", filteredViewModel);
         }
+
+
 
         [HttpGet]
         public IActionResult AddPerson()

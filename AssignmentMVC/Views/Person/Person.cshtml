@@ -7,12 +7,14 @@
 <h4><strong>Start</strong> Person.cshtml</h4>
 
 <form asp-controller="Person" asp-action="Filter" method="post">
-    <h2>Filters the Person list - Dangerous [Removes Content from view model]</h2>
-    <h3>If field is empty, it is excluded from filtering</h3>
+    <h2>Filters the Person list</h2>
+    <h3>If field is empty, current list is displayed</h3>
     <p>
-        <label>By Full name: <input type="text" name="filterbyfullname" placeholder="Full name" /></label>
-        <label>By Phone Number: <input type="text" name="filterbyphonenumber" placeholder="Phone Number" /></label>
-        <label>By City: <input type="text" name="filterbycity" placeholder="City" /></label>
+        <label>Search: <input type="text" name="filtertext" placeholder="[Fullname Or City]" /></label>
+        
+@*        <label>By Phone Number: <input type="text" name="filterbyphonenumber" placeholder="Phone Number" /></label>
+        <label>By City: <input type="text" name="filterbycity" placeholder="City" /></label>*@
+
     </p>
 
     <button type="submit">Filter the list</button>
@@ -40,22 +42,34 @@
 
 
 
-
 <form asp-controller="Person" asp-action="Person" method="post">
     <h2>Add a Person</h2>
     <p>
-        <label>Full name: <input type="text" name="fullname" placeholder="Your Full name" /></label>
-  
-        <label>Phonenumber: <input type="text" name="phonenumber" placeholder="Your phonennumber" /></label>
-   
-        <label>City: <input type="text" name="city" placeholder="City name" /></label>
+        <label asp-for="cpvm.FullName">Full name: 
+            <input asp-for="cpvm.FullName" type="text" placeholder="Full Name" />
+            <span asp-validation-for="cpvm.FullName"></span>
+        </label>
     </p>
     <p>
-        @*<button type="submit" value="Create">Add Person</button>*@
+        <label asp-for="cpvm.PhoneNumber">Phonenumber:
+            <input asp-for="cpvm.PhoneNumber" type="text" placeholder="Your phonennumber" />
+            <span asp-validation-for="cpvm.PhoneNumber"></span>
+        </label>
+    </p>
+    <p>
+        <label asp-for="cpvm.City">City: 
+            <input asp-for="cpvm.City" type="text" placeholder="City name" />
+            <span asp-validation-for="cpvm.City"></span>
+        </label>
+    </p>
+        
+    <p>
         <button type="submit">Add a Person to the list</button>
     </p>
 </form>
 
+
+@*Removal Manually - Debug*@
 @*
 <form asp-controller="Person" asp-action="RemovePerson" method="post">
     <h2>Remove a Person by id - Debugging help</h2>
