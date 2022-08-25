@@ -47,18 +47,22 @@ namespace AssignmentMVC.Controllers
             {
                 return View("Person", myPeopleView);
             }
+            
+            return View("Person", CreateFilteredViewModel(filtertext));
+        }
 
+        private PeopleViewModel CreateFilteredViewModel(string filterText) 
+        {
             //Create a filtered list based original viewmodel
             var filteredPeople = myPeopleView.listOfPersons.Where
-                (x => x.FullName == filtertext || x.City == filtertext).ToList();
+                (aPeople => aPeople.FullName == filterText || aPeople.City == filterText).ToList();
 
             //Create a new filtered viewmodel
             var filteredViewModel = new PeopleViewModel();
             //Set the filtered view 
             filteredViewModel.listOfPersons = filteredPeople;
 
-
-            return View("Person", filteredViewModel);
+            return filteredViewModel;
         }
 
 
