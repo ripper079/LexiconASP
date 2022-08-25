@@ -7,8 +7,8 @@ namespace AssignmentMVC.Controllers
         public IActionResult Index()
         {
             Console.WriteLine("Hit on AjaxController on Index()");
-            return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Index()] action");     //"Custom page"
-            //return View();
+            //return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Index()] action");     //"Custom page"
+            return View();
 
         }
 
@@ -17,14 +17,14 @@ namespace AssignmentMVC.Controllers
         {
             Console.WriteLine("Hit on AjaxController on Get()");
             //return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Get()] action");
-            return View("Hello");
+            return View("Index");
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            Console.WriteLine("Hit on AjaxController on Get(int id)");
-            return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Get(int id)] action");
-        }
+        //[HttpGet("{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    Console.WriteLine("Hit on AjaxController on Get(int id)");
+        //    return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Get(int id)] action");
+        //}
     }
 }

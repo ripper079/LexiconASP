@@ -19,10 +19,11 @@ function loadPeople() {
     xhr.onload = function () { //Callback function
         console.log("Callback function HIT!!!!");
         if (this.status == 200) {
-            console.log("Status is" + this.status + " Daniel");
-            console.log("Message is:" + this.responseText);
+            console.log("Status is:" + this.status + " [Daniel]");
+            console.log("Message is:" + this.responseText);//This returns the whole page
+
         }
-        console.log(this);
+        /*console.log(this);*/
     }
     //Send the resource [Respond the the resource and HTTP status]
     xhr.send();
