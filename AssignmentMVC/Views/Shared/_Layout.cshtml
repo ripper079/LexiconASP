@@ -31,14 +31,23 @@
                     <a asp-controller="Person" asp-action="Person">People Index</a>
                 </li>
                 <li>
-                    <button><a asp-controller="Person" asp-action="Index">People</a></button>
+                    <a asp-controller="Ajax" asp-action="Index">Ajax</a>
                 </li>
                 <li>
-                    <button><a asp-controller="Person" asp-action="Index">Details</a></button>
+                    <button id="buttonpeople">People</button>
                 </li>
                 <li>
-                    <button><a asp-controller="Person" asp-action="Index">Delete</a></button>
+                    <button id="buttondetails">Details</button>
                 </li>
+                <li>
+                    <button id="buttondelete">Delete</button>
+                </li>
+                @*<li>
+                    <button id="buttondetails"><a asp-controller="Person" asp-action="Index">Details</a></button>
+                </li>
+                <li>
+                    <button id="buttondelete"><a asp-controller="Person" asp-action="Index">Delete</a></button>
+                </li>*@
             </ul>
         </nav>           
     </header>
@@ -52,7 +61,7 @@
         <p><strong>End </strong> - Common code in _Layout.cshtml</p>
         
     </div>
-
+    <script src="~/js/js_ajax.js"></script>
 </body>
 
 <footer>&copy; Daniel Oikarainen - This page was generated @DateTime.Now.ToString("yyyy/MM/dd")</footer>
