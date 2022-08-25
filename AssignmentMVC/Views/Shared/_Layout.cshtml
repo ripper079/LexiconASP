@@ -61,7 +61,12 @@
         <p><strong>End </strong> - Common code in _Layout.cshtml</p>
         
     </div>
-    <script src="~/js/js_ajax.js"></script>
+    @section scripts{
+        <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"> </script>
+        <script src="~/lib/jquery/jquery.min.js"></script>
+        <script src="~/js/js_ajax.js"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    }
 </body>
 
 <footer>&copy; Daniel Oikarainen - This page was generated @DateTime.Now.ToString("yyyy/MM/dd")</footer>

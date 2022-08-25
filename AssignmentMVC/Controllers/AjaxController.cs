@@ -18,6 +18,13 @@ namespace AssignmentMVC.Controllers
             Console.WriteLine("Hit on AjaxController on Get()");
             //return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Get()] action");
             return View("Index");
+            //return Json(
+            //    new
+            //    {
+            //        data = "blah blah blah",
+            //        date = DateTime.Now
+            //    }
+            //    );
         }
 
         //[HttpGet("{id}")]
