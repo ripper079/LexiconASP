@@ -10,7 +10,10 @@ namespace AssignmentMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return NotFound("Custom Simulated 404 Not Found Page - In [PersonController] on [Index()] action");     //"Custom page"
+            
+            //return NotFound();                                                                              //"Standard" custom - Returns a HTTP ERROR 404
+            //return View();
         }
 
         [HttpGet]
