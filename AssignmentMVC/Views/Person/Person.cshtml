@@ -28,15 +28,19 @@
         <th>City</th>
         <th>Delete</th>
     </tr>
-@foreach (var item in Model.listOfPersons)
-{
+@foreach (var aPersonInstance in Model.listOfPersons)
+{    
+    <partial name="_PersonRecord" model="aPersonInstance" />
+    
+@*
     <tr>
-        <td>@item.IdPerson</td>
-        <td>@item.FullName</td>
-        <td>@item.PhoneNumber</td>
-        <td>@item.City</td>
-        <td><a asp-controller="Person" asp-action="RemovePerson" asp-route-id="@item.IdPerson">Remove - @item.IdPerson</a></td>
-    </tr>    
+        <td>@aPersonInstance.IdPerson</td>
+        <td>@aPersonInstance.FullName</td>
+        <td>@aPersonInstance.PhoneNumber</td>
+        <td>@aPersonInstance.City</td>
+        <td><a asp-controller="Person" asp-action="RemovePerson" asp-route-id="@aPersonInstance.IdPerson">Remove - @aPersonInstance.IdPerson</a></td>
+    </tr>   
+    *@
 }
 </table>
 

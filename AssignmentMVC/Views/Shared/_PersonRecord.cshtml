@@ -1,0 +1,9 @@
+﻿@model AssignmentMVC.Models.Person;
+
+<tr>
+        <td>@Model.IdPerson</td>
+        <td>@Model.FullName</td>
+        <td>@Model.PhoneNumber</td>
+        <td>@Model.City</td>
+        <td><a asp-controller="Person" asp-action="RemovePerson" asp-route-id="@Model.IdPerson">Remove - @Model.IdPerson</a></td>
+</tr>
