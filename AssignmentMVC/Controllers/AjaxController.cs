@@ -64,5 +64,44 @@ namespace AssignmentMVC.Controllers
         {
             return PartialView("_ListPersonsWithoutId", myPeopleView);
         }
+
+        public IActionResult GetOnePersons(int id)
+        {
+            //Create a filtered list of ONE person based original viewmodel
+            var filteredPeople = myPeopleView.listOfPersons.Where
+                (aPeople => aPeople.IdPerson == id).ToList();
+
+            //Create a new filtered viewmodel
+            var filteredViewModel = new PeopleViewModel();
+            //Set the filtered view 
+            filteredViewModel.listOfPersons = filteredPeople;
+
+
+            return PartialView("_ListPersonsWithoutId", filteredViewModel);
+        }
+
+        [HttpPost]
+        public string RemovePerson(int id)
+        {
+            if (IsPersonValid(id)) {
+                myPeopleView.removePersonFromList(id);
+                return "The person with id" + id + " was deleted";
+            }
+
+            return "No person removed. Id was incorrect";
+        }
+
+        private bool IsPersonValid(int prospectId) 
+        {
+            foreach(var item in myPeopleView.listOfPersons)
+            {
+                if (item.IdPerson == prospectId) 
+                {
+                    return true;
+                }
+            }
+            return false;
+            
+        }
     }
 }

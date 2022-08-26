@@ -5,11 +5,14 @@
 
 <h1>AJAX - Testing Testing Testing - Index.cshtml</h1>
 
-<button id="btnshowallpeople" class="btn btn-primary">Show All People</button>
-<button id="btnshowdetailpeople" class="btn btn-primary">Detail of a person</button>
-<button id="btndeleteapeople" class="btn btn-primary">Delete a person</button>
-<div id="emptyDiv">An empty div here</div>
+<button id="btnshowallpeople" class="btn btn-primary">Show All People</button><br><br>
+<button id="btnshowdetailpeople" class="btn btn-secondary">Detail of a person</button>
+<button id="btndeleteapeople" class="btn btn-danger">Delete a person</button><input type="number" id="idofperson" placeholder="PersonID" min="1" max="5000"><br><br>
 
+
+
+
+<div id="emptyDiv">An empty div here</div>
 
 @* This works *@
 
@@ -36,23 +39,19 @@
 
     <script>
 
+    //Show all people button
 
     $(document).ready(function () {
         $('#btnshowallpeople').on('click', function () {                   //
+            console.log("Button show all people clicked");            
 
             $.ajax({
                 type: "GET",
                 url: "/Ajax/GetAllPersons",
-                success: function (response) {
+                success: function (response) {                          //returns a partial view
+                    
 
-
-                    //alert("jQuery, Within Ajax.");
-                    //console.log(response);                    
-
-                    //Do something - Show return a view a all people
-                    //$("#emptyDiv").html("Populated the div element now");
-                    $("#emptyDiv").html(response);
-
+                    $("#emptyDiv").html(response);                      //set a "new" view
                 }
             });
 
@@ -60,22 +59,23 @@
     });
 
 
-
+    //Show detail button
     $(document).ready(function () {
-        $('#btnshowdetailpeople').on('click', function () {                   //When show all people button 
+        $('#btnshowdetailpeople').on('click', function () {                   
+            var idOfOnePersonDetail = $("#idofperson").val();
+            
+            console.log("Button |Detail of a person| was clicked. Value selected was: " + idOfOnePersonDetail);
+            
 
             $.ajax({
                 type: "GET",
-                url: "/Ajax/Index",
-                success: function (response) {
+                url: "/Ajax/GetOnePersons",
+                data: {id: idOfOnePersonDetail},
+                success: function (response) {                                      //Return a partial view
 
 
                     
-                    console.log(response);          //This return a whole page                  
-
-                    //Do something - Show return a view a all people
-                    //$("#emptyDiv").html("Populated the div element now");
-                    //$("#emptyDiv").html(response);
+                    $("#emptyDiv").html(response);                      //set a "new" view
 
                 }
             });
@@ -83,7 +83,29 @@
         });
     });
 
+    //Show delete button
+    $(document).ready(function () {
+        $('#btndeleteapeople').on('click', function () {                   
+            var idOfOnePersonDelete = $("#idofperson").val();
+            
+            console.log("Button |Delete a person| was clicked. Value selected was: " + idOfOnePersonDelete);
 
+            $.ajax({
+                type: "POST",
+                url: "/Ajax/RemovePerson",
+                //dataType: "html",
+                data: {id: idOfOnePersonDelete},
+                success: function (response) {
+                    //alert("A user was deleted");
+
+                    
+                    $("#emptyDiv").html(response);                      //set a "new" view
+
+                }
+            });
+
+        });
+    });
     
 
 
