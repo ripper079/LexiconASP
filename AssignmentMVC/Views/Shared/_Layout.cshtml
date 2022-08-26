@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -34,14 +35,14 @@
                     <a asp-controller="Ajax" asp-action="Index">Ajax</a>
                 </li>
                 <li>
-                    <button id="buttonpeople">People</button>
+                    <button id="buttonpeople" class="btn btn-success">People</button>
                 </li>
                 <li>
                     <button id="buttondetails">Details</button>
                 </li>
                 <li>
                     <button id="buttondelete">Delete</button>
-                </li>
+                </li>                
                 @*<li>
                     <button id="buttondetails"><a asp-controller="Person" asp-action="Index">Details</a></button>
                 </li>
@@ -58,16 +59,15 @@
                 
         @RenderBody()
         
-        <p><strong>End </strong> - Common code in _Layout.cshtml</p>
-        
-    </div>
-    @section scripts{
-        <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"> </script>
+        <p><strong>End </strong> - Common code in _Layout.cshtml</p>        
+    </div>    
+    <footer>&copy; Daniel Oikarainen - This page was generated @DateTime.Now.ToString("yyyy/MM/dd")</footer>
+
+    @*@section scripts{}@await RenderSectionAsync("Scripts", required: false)*@
         <script src="~/lib/jquery/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/js_ajax.js"></script>
         @await RenderSectionAsync("Scripts", required: false)
-    }
+    
 </body>
-
-<footer>&copy; Daniel Oikarainen - This page was generated @DateTime.Now.ToString("yyyy/MM/dd")</footer>
 </html>

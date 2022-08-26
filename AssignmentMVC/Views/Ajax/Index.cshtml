@@ -5,3 +5,25 @@
 
 <h1>AJAX - Testing Testing Testing - Index.cshtml</h1>
 
+<div id="emptyDiv">An empty div here</div>
+<button id="btnpower" class="btn btn-primary">Primary Power</button>
+
+
+@* This works *@
+@section scripts {
+
+    <script>
+        //Will execute after the page has been loaded
+        $(document).ready(function () {
+            $('#btnpower').on('click', function () {                   
+                alert("Hello");
+                console.log("Hello again");
+            });
+        });
+    </script>
+
+
+
+}
+
+

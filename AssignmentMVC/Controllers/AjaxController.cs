@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using AssignmentMVC.Models;             //For testing
 
 namespace AssignmentMVC.Controllers
 {
@@ -33,5 +34,24 @@ namespace AssignmentMVC.Controllers
         //    Console.WriteLine("Hit on AjaxController on Get(int id)");
         //    return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Get(int id)] action");
         //}
+
+        //For testing
+        public JsonResult MyJson() 
+        {
+            Person myPerson = new Person() 
+            {
+                FullName = "Görgen Jönsson",
+                City = "Stockholm",
+                PhoneNumber = "031-330330",
+                IdPerson = 999
+            };
+
+            return Json(myPerson);
+        }
+
+        public String MyNameIsCool() 
+        {
+            return "Daniel";
+        }
     }
 }
