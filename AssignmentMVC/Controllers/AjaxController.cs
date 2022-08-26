@@ -5,11 +5,16 @@ namespace AssignmentMVC.Controllers
 {
     public class AjaxController : Controller
     {
+        public static PeopleViewModel myPeopleView = new PeopleViewModel();
+        public static int IDForPeople = 1000;
+
         public IActionResult Index()
         {
             Console.WriteLine("Hit on AjaxController on Index()");
             //return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Index()] action");     //"Custom page"
             return View();
+            //return View(myPeopleView);
+            //return PartialView("_ListAllPersons", myPeopleView);
 
         }
 
@@ -40,7 +45,7 @@ namespace AssignmentMVC.Controllers
         {
             Person myPerson = new Person() 
             {
-                FullName = "Görgen Jönsson",
+                FullName = "Jörgen Jönsson",
                 City = "Stockholm",
                 PhoneNumber = "031-330330",
                 IdPerson = 999
@@ -49,9 +54,15 @@ namespace AssignmentMVC.Controllers
             return Json(myPerson);
         }
 
+        //Testing!!!
         public String MyNameIsCool() 
         {
-            return "Daniel";
+            return "Daniel Cool Oikarainen";
+        }
+
+        public IActionResult GetAllPersons()
+        {
+            return PartialView("_ListPersonsWithoutId", myPeopleView);
         }
     }
 }

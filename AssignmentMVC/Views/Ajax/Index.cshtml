@@ -5,25 +5,94 @@
 
 <h1>AJAX - Testing Testing Testing - Index.cshtml</h1>
 
+<button id="btnshowallpeople" class="btn btn-primary">Show All People</button>
+<button id="btnshowdetailpeople" class="btn btn-primary">Detail of a person</button>
+<button id="btndeleteapeople" class="btn btn-primary">Delete a person</button>
 <div id="emptyDiv">An empty div here</div>
-<button id="btnpower" class="btn btn-primary">Primary Power</button>
 
 
 @* This works *@
-@section scripts {
+
+@*@section scripts {
 
     <script>
         //Will execute after the page has been loaded
         $(document).ready(function () {
-            $('#btnpower').on('click', function () {                   
-                alert("Hello");
-                console.log("Hello again");
+            $('#btnshowallpeople').on('click', function () {        //When button is clicked                   
+                alert("Clicked the Show all people Button");
+                
+                //Do something - Show return a view a all people
+                $("#emptyDiv").html("Populated the div element now");
             });
         });
     </script>
 
+}
 
+*@
+
+
+@section scripts {
+
+    <script>
+
+
+    $(document).ready(function () {
+        $('#btnshowallpeople').on('click', function () {                   //
+
+            $.ajax({
+                type: "GET",
+                url: "/Ajax/GetAllPersons",
+                success: function (response) {
+
+
+                    //alert("jQuery, Within Ajax.");
+                    //console.log(response);                    
+
+                    //Do something - Show return a view a all people
+                    //$("#emptyDiv").html("Populated the div element now");
+                    $("#emptyDiv").html(response);
+
+                }
+            });
+
+        });
+    });
+
+
+
+    $(document).ready(function () {
+        $('#btnshowdetailpeople').on('click', function () {                   //When show all people button 
+
+            $.ajax({
+                type: "GET",
+                url: "/Ajax/Index",
+                success: function (response) {
+
+
+                    
+                    console.log(response);          //This return a whole page                  
+
+                    //Do something - Show return a view a all people
+                    //$("#emptyDiv").html("Populated the div element now");
+                    //$("#emptyDiv").html(response);
+
+                }
+            });
+
+        });
+    });
+
+
+    
+
+
+
+    </script>
 
 }
+
+
+
 
 

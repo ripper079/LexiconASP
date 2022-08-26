@@ -1,0 +1,19 @@
+﻿@model AssignmentMVC.Models.PeopleViewModel;
+
+@{
+    ViewData["Title"] = "List all Persons";
+}
+
+<table>
+    <tr>
+        <th>Id number</th>
+        <th>FullName</th>
+        <th>Phone Number</th>
+        <th>City</th>
+        <th>Delete</th>
+    </tr>
+@foreach (var aPersonInstance in Model.listOfPersons)
+{    
+    <partial name="_PersonRecord" model="aPersonInstance" />    
+}
+</table>

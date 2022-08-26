@@ -42,7 +42,10 @@
                 </li>
                 <li>
                     <button id="buttondelete">Delete</button>
-                </li>                
+                </li>
+                <li>
+                    <button id="buttonjson" class="btn btn-dark">JSon</button>
+                </li>   
                 @*<li>
                     <button id="buttondetails"><a asp-controller="Person" asp-action="Index">Details</a></button>
                 </li>
@@ -63,10 +66,12 @@
     </div>    
     <footer>&copy; Daniel Oikarainen - This page was generated @DateTime.Now.ToString("yyyy/MM/dd")</footer>
 
-    @*@section scripts{}@await RenderSectionAsync("Scripts", required: false)*@
+    
         <script src="~/lib/jquery/jquery.min.js"></script>
         <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/js_ajax.js"></script>
+        
+        @*Maybe not required*@
         @await RenderSectionAsync("Scripts", required: false)
     
 </body>

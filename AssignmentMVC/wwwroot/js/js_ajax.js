@@ -17,15 +17,15 @@ $(document).ready(function () {
 //Will execute after the page has been loaded
 //JQuery
 $(document).ready(function () {
-    $('#buttonpeople').on('click', function () {                    //When button clicked
-        alert("Hello button people" + " from Ajax");                                             //Code block to execute
+    $('#buttonpeople').on('click', function () {                    //When menu button People clicked
+        alert("Hello button people" + " from Ajax");                //Code block to execute
         console.log("Button |buttonpeople| clicked");               //Code block to execute
     });
 });
 
 
 $(document).ready(function () {
-    $('#buttondetails').on('click', function () {                   //When button clicked
+    $('#buttondetails').on('click', function () {                   //When menu button Detail clicked
         $.get("/Ajax/MyNameIsCool", function (data) {
             alert(data);
             console.log(data);
@@ -36,18 +36,34 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $('#buttondelete').on('click', function () {                   //When button clicked
+    $('#buttondelete').on('click', function () {                   //When menu button Delete clicked
 
         $.ajax({
             type: "GET",
-            url: "/Ajax/MyNameIsCool",
+            url: "/Ajax/GetAllPersons",
             success: function (response) {
-                alert("jQuery, Within Ajax. The response is: " + response);
+                alert("jQuery, Within Ajax. The response is: |" + response + "|");
             }
         });
 
     });
+});
 
+
+$(document).ready(function () {
+    $('#buttonjson').on('click', function () {                   //When menu button JSon clicked
+
+        $.ajax({
+            type: "GET",
+            url: "/Ajax/MyJson",
+            success: function (response) {
+                alert("jQuery, Within Ajax. The response is: |" + response + "|");
+                console.log(response);
+                console.log("The name is: " + response.fullName);
+            }
+        });
+
+    });
 });
 
 
