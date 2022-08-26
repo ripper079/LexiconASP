@@ -77,7 +77,7 @@ namespace AssignmentMVC.Models
             }            
         }
 
-        //Filters (and re) the actual list
+        //Filters the original list(viewmodel). VERY vague description in assigment paper. Colleagues has 3 different Interpretations of "Search"
         public void filterList(string filterByFullName, string filterByPhoneNumber, string filterByCity) 
         {
             List<Person> resultingList = listOfPersons;            

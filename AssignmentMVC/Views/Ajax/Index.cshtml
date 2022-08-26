@@ -11,28 +11,8 @@
 
 
 
-
+@*The container for partial views*@
 <div id="emptyDiv">An empty div here</div>
-
-@* This works *@
-
-@*@section scripts {
-
-    <script>
-        //Will execute after the page has been loaded
-        $(document).ready(function () {
-            $('#btnshowallpeople').on('click', function () {        //When button is clicked                   
-                alert("Clicked the Show all people Button");
-                
-                //Do something - Show return a view a all people
-                $("#emptyDiv").html("Populated the div element now");
-            });
-        });
-    </script>
-
-}
-
-*@
 
 
 @section scripts {
@@ -40,21 +20,18 @@
     <script>
 
     //Show all people button
-
     $(document).ready(function () {
-        $('#btnshowallpeople').on('click', function () {                   //
-            console.log("Button show all people clicked");            
+        $('#btnshowallpeople').on('click', function () {                    //Button click body
+            //console.log("Button show all people clicked");                  //Debug info                  
 
             $.ajax({
                 type: "GET",
                 url: "/Ajax/GetAllPersons",
-                success: function (response) {                          //returns a partial view
-                    
+                success: function (response) {                      //returns a partial view                    
 
-                    $("#emptyDiv").html(response);                      //set a "new" view
+                    $("#emptyDiv").html(response);                  //set a "new" view
                 }
             });
-
         });
     });
 
@@ -64,22 +41,17 @@
         $('#btnshowdetailpeople').on('click', function () {                   
             var idOfOnePersonDetail = $("#idofperson").val();
             
-            console.log("Button |Detail of a person| was clicked. Value selected was: " + idOfOnePersonDetail);
+            //console.log("Button |Detail of a person| was clicked. Value selected was: " + idOfOnePersonDetail);
             
-
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/Ajax/GetOnePersons",
                 data: {id: idOfOnePersonDetail},
-                success: function (response) {                                      //Return a partial view
-
-
+                success: function (response) {              //Return a partial view - Response could be named anything
                     
-                    $("#emptyDiv").html(response);                      //set a "new" view
-
+                    $("#emptyDiv").html(response);          //set a "new" view
                 }
             });
-
         });
     });
 
@@ -88,7 +60,7 @@
         $('#btndeleteapeople').on('click', function () {                   
             var idOfOnePersonDelete = $("#idofperson").val();
             
-            console.log("Button |Delete a person| was clicked. Value selected was: " + idOfOnePersonDelete);
+            //console.log("Button |Delete a person| was clicked. Value selected was: " + idOfOnePersonDelete);
 
             $.ajax({
                 type: "POST",
@@ -97,24 +69,15 @@
                 data: {id: idOfOnePersonDelete},
                 success: function (response) {
                     //alert("A user was deleted");
-
                     
-                    $("#emptyDiv").html(response);                      //set a "new" view
-
+                    $("#emptyDiv").html(response);                      //returns a string indicating status for deleting
                 }
             });
-
         });
-    });
-    
-
-
+    });    
 
     </script>
 
 }
-
-
-
 
 

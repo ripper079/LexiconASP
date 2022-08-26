@@ -6,41 +6,26 @@ namespace AssignmentMVC.Controllers
     public class AjaxController : Controller
     {
         public static PeopleViewModel myPeopleView = new PeopleViewModel();
-        public static int IDForPeople = 1000;
+        //public static int IDForPeople = 1000;
 
         public IActionResult Index()
         {
             Console.WriteLine("Hit on AjaxController on Index()");
             //return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Index()] action");     //"Custom page"
-            return View();
-            //return View(myPeopleView);
-            //return PartialView("_ListAllPersons", myPeopleView);
 
+            return View();            
         }
 
+        //For testing/reference
         [HttpGet]
         public IActionResult Get() 
         {
             Console.WriteLine("Hit on AjaxController on Get()");
             //return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Get()] action");
-            return View("Index");
-            //return Json(
-            //    new
-            //    {
-            //        data = "blah blah blah",
-            //        date = DateTime.Now
-            //    }
-            //    );
+            return View("Index");            
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    Console.WriteLine("Hit on AjaxController on Get(int id)");
-        //    return NotFound("Custom Simulated 404 Not Found Page - In [AjaxController] on [Get(int id)] action");
-        //}
-
-        //For testing
+        //For testing/reference
         public JsonResult MyJson() 
         {
             Person myPerson = new Person() 
@@ -54,7 +39,7 @@ namespace AssignmentMVC.Controllers
             return Json(myPerson);
         }
 
-        //Testing!!!
+        //For testing/reference
         public String MyNameIsCool() 
         {
             return "Daniel Cool Oikarainen";
@@ -65,6 +50,7 @@ namespace AssignmentMVC.Controllers
             return PartialView("_ListPersonsWithoutId", myPeopleView);
         }
 
+        [HttpPost]
         public IActionResult GetOnePersons(int id)
         {
             //Create a filtered list of ONE person based original viewmodel
@@ -75,7 +61,6 @@ namespace AssignmentMVC.Controllers
             var filteredViewModel = new PeopleViewModel();
             //Set the filtered view 
             filteredViewModel.listOfPersons = filteredPeople;
-
 
             return PartialView("_ListPersonsWithoutId", filteredViewModel);
         }
