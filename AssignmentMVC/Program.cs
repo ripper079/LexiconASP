@@ -1,3 +1,6 @@
+using AssignmentMVC.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Service mvc working
@@ -7,6 +10,11 @@ builder.Services.AddMvc();
 builder.Services.AddSession(options => 
 {
     options.IdleTimeout = TimeSpan.FromMinutes(15);
+});
+
+//Add entity framework service support 
+builder.Services.AddDbContext<ApplicationDbContext>(options => {                                 //What db to use
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));       //Use DefaultConnection, must match with Program.cs
 });
 
 

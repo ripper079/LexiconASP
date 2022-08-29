@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AssignmentMVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AssignmentMVC.Data
 {
@@ -13,5 +14,11 @@ namespace AssignmentMVC.Data
         {
 
         }
+
+        //Test 
+        //Create a table
+        //Table Name is People
+        //Table content should be Person
+        public DbSet<Person> People { get; set; }
     }
 }

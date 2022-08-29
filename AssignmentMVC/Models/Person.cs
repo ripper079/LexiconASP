@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace AssignmentMVC.Models
 {
     public class Person
     {
+        [Key]
         public int IdPerson { get; set; }
 
         public string FullName { get; set; }
