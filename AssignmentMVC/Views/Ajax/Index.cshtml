@@ -39,14 +39,14 @@
     //Show detail button
     $(document).ready(function () {
         $('#btnshowdetailpeople').on('click', function () {                   
-            var idOfOnePersonDetail = $("#idofperson").val();
+            var idOfOnePersonDetail = $("#idofperson").val();       //Retreive value from text input
             
             //console.log("Button |Detail of a person| was clicked. Value selected was: " + idOfOnePersonDetail);
             
             $.ajax({
                 type: "POST",
                 url: "/Ajax/GetOnePersons",
-                data: {id: idOfOnePersonDetail},
+                data: {id: idOfOnePersonDetail},            //Argument, make sure to match id with parameter list in corresponding action method
                 success: function (response) {              //Return a partial view - Response could be named anything
                     
                     $("#emptyDiv").html(response);          //set a "new" view
@@ -58,7 +58,7 @@
     //Show delete button
     $(document).ready(function () {
         $('#btndeleteapeople').on('click', function () {                   
-            var idOfOnePersonDelete = $("#idofperson").val();
+            var idOfOnePersonDelete = $("#idofperson").val();       //Retreive value from text input
             
             //console.log("Button |Delete a person| was clicked. Value selected was: " + idOfOnePersonDelete);
 
@@ -66,11 +66,11 @@
                 type: "POST",
                 url: "/Ajax/RemovePerson",
                 //dataType: "html",
-                data: {id: idOfOnePersonDelete},
-                success: function (response) {
+                data: {id: idOfOnePersonDelete},            //Argument, make sure to match id with parameter list in corresponding action method
+                success: function (response) {              //Returns a simple string indicating delete status
                     //alert("A user was deleted");
                     
-                    $("#emptyDiv").html(response);                      //returns a string indicating status for deleting
+                    $("#emptyDiv").html(response);          //returns a string indicating status for deleting
                 }
             });
         });
