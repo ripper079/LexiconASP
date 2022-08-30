@@ -1,26 +1,96 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AssignmentMVC.Models;
+using AssignmentMVC.Data;
 
 namespace AssignmentMVC.Controllers
 {
     public class PersonController : Controller
     {
-        public static PeopleViewModel myPeopleView = new PeopleViewModel();
-        public static int IDForPeople = 100;
+        //public static PeopleViewModel myPeopleView = new PeopleViewModel();
+        public static PeopleViewModel myPeopleViewModel = new PeopleViewModel();
+        public static int IDForPeople = 100;        //Destinguish between default id and ids added later in myPeopleViewModel
+
+        /*private*/ readonly ApplicationDbContext _context; //skapar en readonly av DbContext
+
+        //Magic in action
+        //Dependecy injection - Solves the problem that the programmer cant directly call the constructor - Do NOT forget to finish config in program.cs
+        public PersonController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
 
         public IActionResult Index()
         {
             return NotFound("Custom Simulated 404 Not Found Page - In [PersonController] on [Index()] action");     //"Custom page"
-            
+
             //return NotFound();                                                                              //"Standard" custom - Returns a HTTP ERROR 404
             //return View();
         }
 
+
+        //Retrieves the data from the DB
+        public IActionResult RetrieveDataDB()
+        {
+            //Passes the whole database, probably not the way to do...
+            //return View("_ListAllPersonsFromDB", _context);
+
+
+
+            //Create a viewModel based on DB content            
+            //Create List from DB
+            var listOfPeopleFromDB = _context.People.ToList();
+            //Create a default view model
+
+            var myPeopleViewModel = new PeopleViewModel();
+            //Populate it with another list
+
+            myPeopleViewModel.listOfPersons = listOfPeopleFromDB;
+
+            //Passes the PeopleViewModel insteed, Reusing old code possible
+            return View("_ListPersonsWithoutId", myPeopleViewModel);            
+        }
+
+
+        public IActionResult LINQSearchPeople()
+        {
+            //Refernce
+            // https://docs.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries
+            string filterTextCity = "Moskva";
+            string filterFullName = "Vladimir Putin";
+
+            //Create List from DB
+            var listOfPeopleFromDB = _context.People.ToList();
+
+            //Filtered the List (Using Linq), resuing
+            var filteredPeople = listOfPeopleFromDB.
+                                    Where(aPeople => aPeople.FullName == filterFullName || aPeople.City == filterTextCity).
+                                    ToList();
+
+            //Previous statement is equivalent to
+            //IEnumerable<Person> filteringQuery =
+            //    from aRow in listOfPeopleFromDB
+            //    where aRow.FullName == filterFullName || aRow.City == filterTextCity
+            //    select aRow;
+            //var filteredPeople = filteringQuery.ToList();
+
+            //Create a People Model
+            //Create a new filtered viewmodel
+            var filteredViewModel = new PeopleViewModel();
+            //Set the filtered view 
+            filteredViewModel.listOfPersons = filteredPeople;
+
+
+            return View("_ListPersonsWithoutId", filteredViewModel);
+        }
+      
+ 
         [HttpGet]
         public IActionResult Person()
         {
-            return View(myPeopleView);           
+            return View(myPeopleViewModel);           
         }
+
 
         //Adds (if possible) a person
         [HttpPost]
@@ -28,19 +98,21 @@ namespace AssignmentMVC.Controllers
         {
             if (ModelState.IsValid) 
             {
-                myPeopleView.addPersonToList(
+                myPeopleViewModel.addPersonToList(
                     pPeopleViewModel.cpvm.FullName, pPeopleViewModel.cpvm.PhoneNumber, pPeopleViewModel.cpvm.City, IDForPeople++
                 );
             }
             
-            return View(myPeopleView);
+            return View(myPeopleViewModel);
         }
        
+
         public IActionResult RemovePerson(int id) 
         {
-            myPeopleView.removePersonFromList(id);
-            return View("Person", myPeopleView);
+            myPeopleViewModel.removePersonFromList(id);
+            return View("Person", myPeopleViewModel);
         }
+
 
         [HttpPost]
         public IActionResult Filter(string filtertext) 
@@ -48,16 +120,18 @@ namespace AssignmentMVC.Controllers
             //Restore original viewmodel
             if (string.IsNullOrEmpty(filtertext))
             {
-                return View("Person", myPeopleView);
+                return View("Person", myPeopleViewModel);
             }
             
             return View("Person", CreateFilteredViewModel(filtertext));
         }
 
+
+        //Creates a new Filtered View Model base in filterText
         private PeopleViewModel CreateFilteredViewModel(string filterText) 
         {
             //Create a filtered list based original viewmodel
-            var filteredPeople = myPeopleView.listOfPersons.Where
+            var filteredPeople = myPeopleViewModel.listOfPersons.Where
                 (aPeople => aPeople.FullName == filterText || aPeople.City == filterText).ToList();
 
             //Create a new filtered viewmodel

@@ -13,6 +13,7 @@
         <h1>Logo</h1>                 
         <nav>
             <ul>
+                @*               
                 <li>
                     <a asp-controller="Home" asp-action="Aboutmeperson">About me</a>
                 </li>
@@ -28,6 +29,7 @@
                 <li>
                     <a asp-controller="Home" asp-action="GuessingGame">Guessing GAME</a>
                 </li>
+                *@
                 <li>
                     <a asp-controller="Person" asp-action="Person">People Index</a>
                 </li>
@@ -35,10 +37,10 @@
                     <a asp-controller="Ajax" asp-action="Index">Ajax</a>
                 </li>         
                 <li>
-                    <a asp-controller="Home" asp-action="RetrieveData">Retrieve Person Data (DB)</a>
+                    <a asp-controller="Person" asp-action="RetrieveDataDB">Retrieve Person Data (DB)</a>
                 </li> 
                 <li>
-                    <a asp-controller="Home" asp-action="LINQSearchPeople">LINQ (DB)</a>
+                    <a asp-controller="Person" asp-action="LINQSearchPeople">LINQ (DB)</a>
                 </li> 
             </ul>
         </nav>           

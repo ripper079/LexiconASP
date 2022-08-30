@@ -6,15 +6,16 @@ namespace AssignmentMVC.Controllers
 {
 
     public class HomeController : Controller
-    {        
-        /*private*/ readonly ApplicationDbContext _context; //skapar en readonly av DbContext
+    {
+        //skapar en readonly av DbContext
+        //private readonly ApplicationDbContext _context; 
         
         //Magic in action
         //Dependecy injection - Solves the problem that the programmer cant directly call the constructor - Do NOT forget to finish config in program.cs
-        public HomeController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        //public HomeController(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
 
         //Main Page
         public IActionResult Index()
@@ -22,50 +23,7 @@ namespace AssignmentMVC.Controllers
             return View();
 
         }
-
-        //Retrieves the data from the DB
-        public IActionResult RetrieveData() 
-        {
-            return View(_context);
-        }
-        
-        public IActionResult LINQSearchPeople() 
-        {
-            //Refernce
-            // https://docs.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries
-            string filterTextCity = "Moskva";
-            string filterFullName = "Vladimir Putin";
-
-            //Create List from DB
-            var listOfPeopleFromDB = _context.People.ToList();
-
-            //Filtered the List (Using Linq), resuing
-            var filteredPeople = listOfPeopleFromDB.
-                                    Where(aPeople => aPeople.FullName == filterFullName || aPeople.City == filterTextCity).
-                                    ToList();
-
-
-            //Previous statement is equivalent to
-            //IEnumerable<Person> filteringQuery =
-            //    from aRow in listOfPeopleFromDB
-            //    where aRow.FullName == filterFullName || aRow.City == filterTextCity
-            //    select aRow;
-            //var filteredPeople = filteringQuery.ToList();
-            
-
-
-            //Create a People Model
-            //Create a new filtered viewmodel
-            var filteredViewModel = new PeopleViewModel();
-            //Set the filtered view 
-            filteredViewModel.listOfPersons = filteredPeople;
-
-
-            return View("_ListPersonsWithoutId", filteredViewModel);
-
-            
-        }
-
+    
         public IActionResult Test()
         {
             return View();
