@@ -1,15 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AssignmentMVC.Models;
+using AssignmentMVC.Data;
 
 namespace AssignmentMVC.Controllers
 {
-    
+
     public class HomeController : Controller
     {        
+        /*private*/ readonly ApplicationDbContext _context; //skapar en readonly av DbContext
+        
+        //Magic in action
+        //Dependecy injection - Solves the problem that the programmer cant directly call the constructor - Dont forget to finish config in program.cs
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Index()
         {
             return View();
+
+            //Use the data to show relevant data
+            //return View(context);
         }
 
         public IActionResult Test()
@@ -33,7 +45,8 @@ namespace AssignmentMVC.Controllers
         }
 
 
-        public void InitSessionValues() 
+        //Changed from public
+        private void InitSessionValues() 
         {
             //The secret number generated 1 to 100
             int randomNumberGeneratedToGuess = Utilities.GenerateSecretNumber();

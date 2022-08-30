@@ -5,6 +5,7 @@ namespace AssignmentMVC.Data
 {
     public class ApplicationDbContext : DbContext
     {
+        /* Required for migration */
         public ApplicationDbContext()
         {
 

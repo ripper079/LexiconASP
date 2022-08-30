@@ -27,7 +27,7 @@
             $.ajax({
                 type: "GET",
                 url: "/Ajax/GetAllPersons",
-                success: function (response) {                      //returns a partial view                    
+                success: function (response) {                      //Return a partial view - Response could be named anything
 
                     $("#emptyDiv").html(response);                  //set a "new" view
                 }
@@ -45,7 +45,7 @@
             
             $.ajax({
                 type: "POST",
-                url: "/Ajax/GetOnePersons",
+                url: "/Ajax/GetOnePersons",                 
                 data: {id: idOfOnePersonDetail},            //Argument, make sure to match id with parameter list in corresponding action method
                 success: function (response) {              //Return a partial view - Response could be named anything
                     
@@ -65,7 +65,7 @@
             $.ajax({
                 type: "POST",
                 url: "/Ajax/RemovePerson",
-                //dataType: "html",
+                //dataType: "html",                         //valid options: "html", "xml", "json" (script and string also)
                 data: {id: idOfOnePersonDelete},            //Argument, make sure to match id with parameter list in corresponding action method
                 success: function (response) {              //Returns a simple string indicating delete status
                     //alert("A user was deleted");

@@ -12,7 +12,7 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(15);
 });
 
-//Add entity framework service support 
+//Add entity framework service support, configure/setup for Dependency Injection
 builder.Services.AddDbContext<ApplicationDbContext>(options => {                                 //What db to use
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));       //Use DefaultConnection, must match with Program.cs
 });
