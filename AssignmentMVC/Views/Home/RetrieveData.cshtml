@@ -1,0 +1,27 @@
+﻿@model AssignmentMVC.Data.ApplicationDbContext;
+
+@{
+    ViewData["Title"] = "RetrieveData";
+}
+
+
+<h2>RetrieveData FROM DataBase</h2>
+<h3>Printing contents in Database</h3>
+<table>
+    <tr>
+        <th>Id number</th>
+        <th>FullName</th>
+        <th>Phone Number</th>
+        <th>City</th>        
+    </tr>
+
+@foreach (var aRecord in Model.People)
+{
+    <tr>
+        <td>@aRecord.IdPerson</td>
+        <td>@aRecord.FullName</td>
+        <td>@aRecord.PhoneNumber</td>
+        <td>@aRecord.City</td>
+    </tr> 
+}
+</table>
