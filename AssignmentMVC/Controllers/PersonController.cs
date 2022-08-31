@@ -5,8 +5,7 @@ using AssignmentMVC.Data;
 namespace AssignmentMVC.Controllers
 {
     public class PersonController : Controller
-    {
-        //public static PeopleViewModel myPeopleView = new PeopleViewModel();
+    {        
         public static PeopleViewModel myPeopleViewModel = new PeopleViewModel();
         public static int IDForPeople = 100;        //Destinguish between default id and ids added later in myPeopleViewModel
 
@@ -30,7 +29,7 @@ namespace AssignmentMVC.Controllers
 
 
         //Retrieves the data from the DB
-        public IActionResult RetrieveDataDB()
+        public IActionResult RetrievePeopleDB()
         {
             //Passes the whole database, probably not the way to do...
             //return View("_ListAllPersonsFromDB", _context);
@@ -40,11 +39,11 @@ namespace AssignmentMVC.Controllers
             //Create a viewModel based on DB content            
             //Create List from DB
             var listOfPeopleFromDB = _context.People.ToList();
+            
             //Create a default view model
-
             var myPeopleViewModel = new PeopleViewModel();
+            
             //Populate it with another list
-
             myPeopleViewModel.listOfPersons = listOfPeopleFromDB;
 
             //Passes the PeopleViewModel insteed, Reusing old code possible
@@ -144,11 +143,11 @@ namespace AssignmentMVC.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult AddPerson()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult AddPerson()
+        //{
+        //    return View();
+        //}
 
 
         [HttpPost]

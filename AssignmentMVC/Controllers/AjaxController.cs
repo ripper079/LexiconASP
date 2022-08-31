@@ -31,7 +31,7 @@ namespace AssignmentMVC.Controllers
             Person myPerson = new Person() 
             {
                 FullName = "Jörgen Jönsson",
-                City = "Stockholm",
+                //City = "Stockholm",
                 PhoneNumber = "031-330330",
                 IdPerson = 999
             };

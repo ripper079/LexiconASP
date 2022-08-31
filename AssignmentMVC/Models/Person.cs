@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AssignmentMVC.Models
 {
@@ -9,8 +8,9 @@ namespace AssignmentMVC.Models
         public int IdPerson { get; set; }
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
-        
+
         public string City { get; set; }
+        //public City City { get; set; }
 
 
         public override string ToString()

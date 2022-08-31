@@ -1,0 +1,23 @@
+﻿@model AssignmentMVC.Models.CountryViewModel;
+
+@{
+    ViewData["Title"] = "RetrieveCountriesFromDB";
+}
+
+<h1>From CountryController RetrieveCountriesFromDB()</h1>
+
+<h3>Data from a CountryViewModel</h3>
+
+<table>
+    <tr>
+        <th>Id Of Country</th>
+        <th>Name of Country</th>          
+    </tr>
+@foreach (var aCountry in Model.listOfCountries)
+{    
+    <tr>
+        <td>@aCountry.IdCountry</td>
+        <td>@aCountry.CountryName</td>        
+    </tr>   
+}
+</table>

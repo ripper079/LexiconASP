@@ -1,0 +1,23 @@
+﻿@model AssignmentMVC.Models.CityViewModel;
+
+@{
+    ViewData["Title"] = "RetrieveCitiesFromDB";
+}
+
+<h1>From CityController - RetrieveCitiesFromDB</h1>
+
+<h3>Data from a CityViewModel</h3>
+
+<table>
+    <tr>
+        <th>Id Of City</th>
+        <th>Name of City</th>          
+    </tr>
+@foreach (var aCity in Model.listOfCities)
+{    
+    <tr>
+        <td>@aCity.IdCity</td>
+        <td>@aCity.CityName</td>        
+    </tr>   
+}
+</table>

@@ -2,6 +2,24 @@
 {
     public class CityViewModel
     {
-        public List<Person> listOfPersons;
+        public List<City> listOfCities;
+
+        public CityViewModel()
+        {
+            listOfCities = new List<City>();
+        }
+
+        //Helper function
+        public bool isIdPresent(int prospectId)
+        {
+            foreach (City aCity in listOfCities)
+            {
+                if (aCity.IdCity == prospectId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
