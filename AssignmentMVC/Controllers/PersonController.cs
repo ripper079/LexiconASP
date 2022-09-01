@@ -47,7 +47,9 @@ namespace AssignmentMVC.Controllers
             myPeopleViewModel.listOfPersons = listOfPeopleFromDB;
 
             //Passes the PeopleViewModel insteed, Reusing old code possible
-            return View("_ListPersonsWithoutId", myPeopleViewModel);            
+            //return View("_ListPersonsWithoutId", myPeopleViewModel);            
+
+            return View(listOfPeopleFromDB);
         }
 
 
@@ -55,7 +57,7 @@ namespace AssignmentMVC.Controllers
         {
             //Refernce
             // https://docs.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries
-            string filterTextCity = "Moskva";
+            //string filterTextCity = "Moskva";
             string filterFullName = "Vladimir Putin";
 
             //Create List from DB
@@ -63,24 +65,24 @@ namespace AssignmentMVC.Controllers
 
             //Filtered the List (Using Linq), resuing
             var filteredPeople = listOfPeopleFromDB.
-                                    Where(aPeople => aPeople.FullName == filterFullName || aPeople.City == filterTextCity).
+                                    Where(aPeople => aPeople.FullName == filterFullName).
                                     ToList();
 
             //Previous statement is equivalent to
             //IEnumerable<Person> filteringQuery =
             //    from aRow in listOfPeopleFromDB
-            //    where aRow.FullName == filterFullName || aRow.City == filterTextCity
+            //    where aRow.FullName == filterFullName 
             //    select aRow;
             //var filteredPeople = filteringQuery.ToList();
 
             //Create a People Model
             //Create a new filtered viewmodel
-            var filteredViewModel = new PeopleViewModel();
+            //var filteredViewModel = new PeopleViewModel();
             //Set the filtered view 
-            filteredViewModel.listOfPersons = filteredPeople;
+            //filteredViewModel.listOfPersons = filteredPeople;
 
 
-            return View("_ListPersonsWithoutId", filteredViewModel);
+            return View(filteredPeople);
         }
       
  
@@ -131,7 +133,7 @@ namespace AssignmentMVC.Controllers
         {
             //Create a filtered list based original viewmodel
             var filteredPeople = myPeopleViewModel.listOfPersons.Where
-                (aPeople => aPeople.FullName == filterText || aPeople.City == filterText).ToList();
+                (aPeople => aPeople.FullName == filterText || aPeople.CityOfPerson.CityName == filterText).ToList();
 
             //Create a new filtered viewmodel
             var filteredViewModel = new PeopleViewModel();

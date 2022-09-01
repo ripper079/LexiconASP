@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AssignmentMVC.Models.Person>;
+
+
+@{
+    ViewData["Title"] = "RetrievePeopleDB";
+}
+
+<h1>RetrievePeopleDB - Display Content in People Database</h1>
+
+
+<table>
+    <tr>
+        <th>Id of Person</th>
+        <th>FullName</th>
+        <th>Phone Number</th>
+        <th>City_Id</th>        
+    </tr>
+
+@foreach (var aPerson in Model)
+{
+    <tr>
+        <td>@aPerson.IdPerson</td>
+        <td>@aPerson.FullName</td>
+        <td>@aPerson.PhoneNumber</td>
+        <td>@aPerson.City_Id</td>
+    </tr> 
+}
+</table>

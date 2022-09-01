@@ -6,12 +6,23 @@ namespace AssignmentMVC.Models
     public class City
     {
         [Key]
-        public int IdCity { get; set; }
-
-        //public int Country_ID { get; set; }
-        //[Required]
+        public int Id { get; set; }
+        //public int IdCity { get; set; }
+        
+        
         public string CityName { get; set; }
 
-        public List<Person> listOfPersons;
+
+        //Navigation properties
+        public int Country_Id { get; set; } //Make it nullable to allow field contain NULL
+        //[Required]
+        [ForeignKey("Country_Id")]
+        public Country Country { get; set; }
+
+
+
+        //Navigation Properties
+        //This creates a foreign keyy.....WTF is going on here...   
+        public List<Person> People { get; set; }
     }
 }

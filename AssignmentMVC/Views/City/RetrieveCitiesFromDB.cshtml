@@ -12,12 +12,15 @@
     <tr>
         <th>Id Of City</th>
         <th>Name of City</th>          
+        <th>Country_id</th>    
     </tr>
 @foreach (var aCity in Model.listOfCities)
 {    
     <tr>
-        <td>@aCity.IdCity</td>
+        @*<td>@aCity.IdCity</td>*@
+        <td>@aCity.Id</td>
         <td>@aCity.CityName</td>        
+        <td>@aCity.Country_Id</td> 
     </tr>   
 }
 </table>

@@ -14,7 +14,8 @@
         {
             foreach (Country aCountry in listOfCountries)
             {
-                if (aCountry.IdCountry == prospectId)
+                //if (aCountry.IdCountry == prospectId)
+                if (aCountry.Id == prospectId)
                 {
                     return true;
                 }

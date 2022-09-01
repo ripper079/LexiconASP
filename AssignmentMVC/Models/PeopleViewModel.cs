@@ -17,37 +17,45 @@ namespace AssignmentMVC.Models
    
         //Initialize the list
         private void PopulateWithPersons() 
-        {            
+        {
             //Aware that last parameter must be < 100 and here thay must be unique
-            addPersonToList("Daniel Oikarainen", "033-0000000", "Borås", 1);
-            addPersonToList("Marko Kiwi", "031-11111", "Göteborg", 2);
-            addPersonToList("Donald Trumph", "011-222222", "WashingtonDC", 3);
-            addPersonToList("Vladimir Putin", "007-3333333", "Moskva", 4);
-            addPersonToList("Santa Kall", "123-12456", "Kiruna", 5);
-            addPersonToList("Kalle Svensson", "033-3421", "Stockholm", 6);
-            addPersonToList("Diego Maradona", "0054-444444", "Buenos Aires", 7);
-            addPersonToList("Lionel Messi", "5554-444444", "Buenos Aires", 8);
-            addPersonToList("Kalle Orvarsson", "132-1234", "Korvstaden", 9);
-            addPersonToList("Daniel Sturesson", "4545-1678932", "Korvstaden", 10);
-            addPersonToList("Olle Svensson", "222-121844", "Kiruna", 11);
-            addPersonToList("Hanna Eriksson", "033-111111", "Stockholm", 12);
-            addPersonToList("Kalle Svensson", "033-222222", "Borås", 13);
-            addPersonToList("Hanna Eriksson", "041-123678", "Malmö", 14);
-            addPersonToList("Glenn Hysen", "123-789-111", "Göteborg", 15);
-            addPersonToList("Valrossen Ross", "0054-444444", "Bubbel havet",16);
-            addPersonToList("Kalle Eriksson", "033-222222", "Borås", 17);
-            addPersonToList("Kalle Svensson", "211-23125", "Strömstad", 18);
+
+            //Added refactoring city to change class city
+            /*
+            IdCity for Borås = 1
+            IdCity for Gothenburg = 2
+            IdCity for Stockholm = 3
+            IdCity for Moscow = 4
+            IdCity for Novosibirsk = 5
+            IdCity for WashingtonDC = 6
+            IdCity for New York = 7
+            IdCity for Chicago = 8
+            IdCity for Buenos Aires = 9
+            IdCity for Lanus = 10
+            IdCity for Rosario = 11
+            */
+
+            addPersonToList("Daniel Oikarainen",    "033-0000000",      "Borås",            1,      1);
+            addPersonToList("Marko Kiwi",           "031-11111",        "Gothenburg",       2,      2);
+            addPersonToList("Donald Trumph",        "011-222222",       "WashingtonDC",     3,      6);
+            addPersonToList("Vladimir Putin",       "007-3333333",      "Moscow",           4,      4);
+            addPersonToList("Santa Kall",           "123-12456",        "Stockholm",        5,      3);
+            addPersonToList("Kalle Svensson",       "033-3421",         "Stockholm",        6,      3);
+            addPersonToList("Diego Maradona",       "0054-444444",      "Lanus",            7,      10);
+            addPersonToList("Lionel Messi",         "5554-444444",      "Rosario",          8,      11);            
         }
         
-        public void addPersonToList(string fullName, string phoneNumber, string city, int idForPerson)
+        //When none idForCity is passes (backward compatibility) it will give a dummy value of 666. Its safe because prior program didn't utilize idForCity
+        public void addPersonToList(string fullName, string phoneNumber, string city, int idForPerson, int idForCity=666)
         {
+
             listOfPersons.Add(
                 new Person() 
                 {
                     IdPerson = idForPerson,
                     FullName = fullName,
                     PhoneNumber = phoneNumber,
-                    City = city
+                    CityOfPerson = new City { CityName = city , Id = idForCity }
                 }
             );
         }
@@ -94,7 +102,7 @@ namespace AssignmentMVC.Models
             
             if (! String.IsNullOrEmpty(filterByCity))
             {
-                resultingList = resultingList.Where(item => String.Equals(item.City, filterByCity)).ToList();
+                resultingList = resultingList.Where(item => String.Equals(item.CityOfPerson.CityName, filterByCity)).ToList();
             }
 
             //New resulting filter

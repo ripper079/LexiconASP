@@ -14,7 +14,8 @@
         {
             foreach (City aCity in listOfCities)
             {
-                if (aCity.IdCity == prospectId)
+                //if (aCity.IdCity == prospectId)
+                if (aCity.Id == prospectId)
                 {
                     return true;
                 }
