@@ -31,23 +31,9 @@ namespace AssignmentMVC.Controllers
         //Retrieves the data from the DB
         public IActionResult RetrievePeopleDB()
         {
-            //Passes the whole database, probably not the way to do...
-            //return View("_ListAllPersonsFromDB", _context);
-
-
-
-            //Create a viewModel based on DB content            
+          
             //Create List from DB
-            var listOfPeopleFromDB = _context.People.ToList();
-            
-            //Create a default view model
-            var myPeopleViewModel = new PeopleViewModel();
-            
-            //Populate it with another list
-            myPeopleViewModel.listOfPersons = listOfPeopleFromDB;
-
-            //Passes the PeopleViewModel insteed, Reusing old code possible
-            //return View("_ListPersonsWithoutId", myPeopleViewModel);            
+            var listOfPeopleFromDB = _context.People.ToList();                  
 
             return View(listOfPeopleFromDB);
         }
@@ -55,9 +41,8 @@ namespace AssignmentMVC.Controllers
 
         public IActionResult LINQSearchPeople()
         {
-            //Refernce
+            //Reference
             // https://docs.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries
-            //string filterTextCity = "Moskva";
             string filterFullName = "Vladimir Putin";
 
             //Create List from DB

@@ -11,7 +11,7 @@ namespace AssignmentMVC.Models
         public string CountryName { get; set; }
 
         //Navigation Properties
-        //This creates a foreign keyy.....WTF is going on here...     
+        //This creates a foreign keyy....WTF magic...     
         public List<City> Cities { get; set; }
 
     }

@@ -22,7 +22,7 @@ namespace AssignmentMVC.Models
 
 
         //Navigation Properties
-        //This creates a foreign keyy.....WTF is going on here...   
+        //This creates a foreign keyy....WTF magic...   
         public List<Person> People { get; set; }
     }
 }
