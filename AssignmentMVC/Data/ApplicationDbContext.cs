@@ -36,12 +36,7 @@ namespace AssignmentMVC.Data
         //This method seed the database
         //Note One limitation of seeding is that you will need to specify the primary key (i normal cases this is done by db itself)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // https://www.youtube.com/watch?v=Qh2hgIc90y0
-            // https://www.youtube.com/watch?v=iW-Mw-PyIAw
-
-            //Enti
-
+        {         
             //When changing key to LanguageId and PersonId it works
             //These 3 statements are needed to make tha many to many connection
             /*
@@ -61,9 +56,7 @@ namespace AssignmentMVC.Data
             */
 
 
-
-            //Jonthan sa att detta behövdes
-            //Default authentication tables, do NOT manually defines the identifiers
+            //Default authentication tables, do NOT manually defines the identifiers(Jonathan source)
             base.OnModelCreating(modelBuilder);
 
             //Make sure that database is empty, may cause problem if existing data occurs
@@ -127,12 +120,11 @@ namespace AssignmentMVC.Data
                 );
             */
 
-            //Table LanguagePerson
-            //column LanguagesId
-            //Column PeopleIdPerson
 
+            // Magic again - Creating joining table by ITSELF!!!
+            // Table = LanguagePerson
+            // Columnnames get PeopleIdPerson and LanguagesId
 
-            //Magic again - columnnames get PeopleIdPerson and LanguagesId
             //Daniel
             modelBuilder.Entity<Person>()
                 .HasMany(p => p.Languages)

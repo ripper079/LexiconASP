@@ -21,7 +21,7 @@ namespace AssignmentMVC.Models
 
         //Relationships to PeopleLanguages
         /*
-        public List<PersonLanguage> PeopleLanguages { get; set; } = new List<PersonLanguage>();//Marko tips
+        public List<PersonLanguage> PeopleLanguages { get; set; } = new List<PersonLanguage>();
         */
 
         //Relationships Languages
