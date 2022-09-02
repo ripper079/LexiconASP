@@ -12,13 +12,20 @@ namespace AssignmentMVC.Models
 
         //public string City { get; set; }
 
-        //Navigation properties
+        //Relationships to Cities
         public int? City_Id { get; set; }
         //[Required]
         [ForeignKey("City_Id")]
         public City CityOfPerson { get; set; }
 
 
+        //Relationships to PeopleLanguages
+        /*
+        public List<PersonLanguage> PeopleLanguages { get; set; } = new List<PersonLanguage>();//Marko tips
+        */
+
+        //Relationships Languages
+        public List<Language> Languages { get; set; } = new List<Language>();
 
         //Printing the current state of an object
         public override string ToString()

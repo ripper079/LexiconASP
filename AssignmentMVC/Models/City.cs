@@ -8,12 +8,12 @@ namespace AssignmentMVC.Models
         [Key]
         public int Id { get; set; }
         //public int IdCity { get; set; }
-        
-        
+                
         public string CityName { get; set; }
 
 
-        //Navigation properties
+        //Navigation properties and relationships
+        //Relationship to Countries
         public int Country_Id { get; set; } //Make it nullable to allow field contain NULL
         //[Required]
         [ForeignKey("Country_Id")]
@@ -21,8 +21,7 @@ namespace AssignmentMVC.Models
 
 
 
-        //Navigation Properties
-        //This creates a foreign keyy....WTF magic...   
+        //Relationship to People/Persons        
         public List<Person> People { get; set; }
     }
 }

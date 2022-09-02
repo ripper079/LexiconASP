@@ -1,0 +1,23 @@
+﻿@model IEnumerable<AssignmentMVC.Models.Language>;
+
+@{
+    ViewData["Title"] = "RetrieveLanguageDB";
+}
+
+<h1>RetrieveLanguageDB - Display Content in Language Database</h1>
+
+
+<table>
+    <tr>
+        <th>Id of Language</th>
+        <th>Language</th>              
+    </tr>
+
+@foreach (var aLanguage in Model)
+{
+    <tr>
+        <td>@aLanguage.Id</td>        
+        <td>@aLanguage.Name</td>     
+    </tr> 
+}
+</table>

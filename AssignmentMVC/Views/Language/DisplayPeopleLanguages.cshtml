@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AssignmentMVC.Models.Person>;
+
+@{
+    ViewData["Title"] = "DisplayPeopleLanguages";
+    string allLanguages = "";
+}
+
+<h1>DisplayPeopleLanguages</h1>
+<h2>Showing all peoples languages skill - From DB</h2>
+
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Language(s)</th>
+    </tr>
+
+    @foreach(var aPerson in Model)
+    {
+        allLanguages = "";
+        <tr>
+            <td>@aPerson.FullName</td>
+            
+            @foreach (var aLanguage in aPerson.Languages)
+            {
+                allLanguages += aLanguage.Name + " ";
+            }
+            <td>@allLanguages</td>
+        </tr>
+    }
+
+</table>
