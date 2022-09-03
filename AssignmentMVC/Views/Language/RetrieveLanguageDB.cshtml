@@ -5,7 +5,10 @@
 }
 
 <h1>RetrieveLanguageDB - Display Content in Language Database</h1>
-
+@if(ViewBag.StatusNewLanguage != null)
+{
+    <h3>Status: @ViewBag.StatusNewLanguage</h3>
+}
 
 <table>
     <tr>

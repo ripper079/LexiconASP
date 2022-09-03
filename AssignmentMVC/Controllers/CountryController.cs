@@ -34,5 +34,57 @@ namespace AssignmentMVC.Controllers
 
             return View(myCountryViewModel);
         }
+
+        public IActionResult AddACountryToDB() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddACountryToDB(Country country)
+        {
+            if (ModelState.IsValid)
+            {
+                //Make a check that a country doesn't already exist(Languages objects)
+                var listOfCountriesFromDB = _context.Contries.ToList();
+                List<string> allPresentCountryNames = new List<string>();
+
+                //Populate all countryies
+                foreach (var aCountry in listOfCountriesFromDB) 
+                {
+                    allPresentCountryNames.Add(aCountry.CountryName);
+                }
+
+                //Doesnt contain the language
+                if (! allPresentCountryNames.Contains(country.CountryName))
+                {
+                    _context.Contries.Add(country);
+                    _context.SaveChanges();
+                    ViewBag.StatusNewCountry = $"Success - Add Country - The Country '{country.CountryName}' was added";
+                }
+                else
+                {
+                    ViewBag.StatusNewCountry = $"Failure - Add Country - The Country '{country.CountryName}' already exists";
+                }
+
+            }
+            else
+            {
+                ViewBag.StatusNewCountry = $"Error: Missing/Invalid input in 'Country form'";
+            }
+
+
+
+            //I may change the the view to accept a IEnumerable insteed, but not sure if i used a viewmodel in previous exercises
+          
+            //Create a country view model
+            var myCountryViewModel = new CountryViewModel();
+            //Populate with viewModel with the list
+            myCountryViewModel.listOfCountries = _context.Contries.ToList();
+
+                       
+
+            return View("RetrieveCountriesFromDB", myCountryViewModel);
+        }
     }
 }

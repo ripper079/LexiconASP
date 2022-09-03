@@ -1,0 +1,15 @@
+﻿@* Bind to model *@
+@model Country;
+
+@{
+    ViewData["Title"] = "AddACountryToDB";
+}
+
+<h2>Add A Country To DB</h2>
+
+
+<form asp-controller="Country" asp-action="AddACountryToDB" method="post" class="form-control">
+    <label asp-for="CountryName"></label>
+    <input asp-for="CountryName" />    
+    <input type="submit" value="Add a Country" class="btn btn-primary"/>
+</form>

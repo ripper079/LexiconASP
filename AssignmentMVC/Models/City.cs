@@ -9,7 +9,7 @@ namespace AssignmentMVC.Models
         public int Id { get; set; }
         //public int IdCity { get; set; }
                 
-        public string CityName { get; set; }
+        public string CityName { get; set; } = "";
 
 
         //Navigation properties and relationships
@@ -22,6 +22,6 @@ namespace AssignmentMVC.Models
 
 
         //Relationship to People/Persons        
-        public List<Person> People { get; set; }
+        public List<Person> People { get; set; } = new List<Person>();
     }
 }

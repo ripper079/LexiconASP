@@ -32,63 +32,52 @@ namespace AssignmentMVC.Controllers
             return View(listOfLanguagesFromDB);
         }
 
-        public IActionResult DisplayPeopleLanguages()
-        {
-            List<Person> people = _context.People.Include(x => x.Languages).ToList();            
-
-            return View(people);
-        }
 
         public IActionResult AddLanguage()
-        {
-            ViewBag.People = new SelectList(_context.People, "IdPerson", "FullName");
-            ViewBag.Languages = new SelectList(_context.Languages, "Id", "Name");
-
+        {            
 
             return View();
         }
 
-        //Adds a language to the DB
         [HttpPost]
-        public IActionResult AddLanguage(int IdOfPerson, int IdOfLanguage) 
+        public IActionResult AddLanguage(Language language)
         {
-            List<Person> people = _context.People.Include(x => x.Languages).ToList();
-
             if (ModelState.IsValid) 
             {
-                //Get the first occurrence of person/language
-                var person = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == IdOfPerson);
-                var language = _context.Languages.FirstOrDefault(aLanguage => aLanguage.Id == IdOfLanguage);
-
-                //Prevents duplicate
-                foreach (var aPerson in people) 
-                {                    
-                    if (aPerson.IdPerson == IdOfPerson)
-                    {
-                        foreach (var aLanguage in aPerson.Languages) 
-                        {
-                            //If that language exist show 
-                            if (aLanguage.Id == IdOfLanguage)
-                            {
-                                var dublicateLanguage = aLanguage.Name;
-                                var nameOfPersonDuplicateLanguage = aPerson.FullName;
-                                ViewBag.LanguageStatus = "Failure - The user " + nameOfPersonDuplicateLanguage + " already knows '" + dublicateLanguage + "'";
-
-                                return View("DisplayPeopleLanguages", people);
-                            }
-                        }
-                    }
+                //Make a check that a language doesn't already exist(Languages objects)
+                var listOfLanguagesFromDB = _context.Languages.ToList();
+                List<string> allPresentLanguagesNames = new List<string>();
+                
+                //Populate all languages
+                foreach (var aLanguage in listOfLanguagesFromDB) 
+                {
+                    allPresentLanguagesNames.Add(aLanguage.Name);
+                }            
+                
+                //Doesnt contain the language
+                if (! allPresentLanguagesNames.Contains(language.Name))
+                {
+                    _context.Languages.Add(language);
+                    _context.SaveChanges();
+                    ViewBag.StatusNewLanguage = $"Success - Add Language - The language '{language.Name}' was added";
                 }
+                else
+                {
+                    ViewBag.StatusNewLanguage = $"Failure - Add Language - The language '{language.Name}' already exists";
+                }
+               
 
-                ViewBag.LanguageStatus = "Success - The user " + person.FullName + " has been added the language '" + language.Name + "'";
-                //Means that language doesnt exist
-                person.Languages.Add(language);
-                //Save to db
-                _context.SaveChanges();
+                
+            }
+            else
+            {
+                ViewBag.StatusNewLanguage = $"Error: Missing/Invalid input in 'language form'";
             }
 
-            return View("DisplayPeopleLanguages", people);
+
+            return View("RetrieveLanguageDB", _context.Languages.ToList());
         }
+
 
 
     }

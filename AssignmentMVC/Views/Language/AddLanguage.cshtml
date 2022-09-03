@@ -1,21 +1,15 @@
-﻿
+﻿@* Bind to model *@
+@model Language;
+
 @{
     ViewData["Title"] = "AddLanguage";
 }
 
-<h1>Add a language To a Person</h1>
+<h2>Add a language To DB</h2>
 
 
-@* Make sure that name property of select element matches corresponding  parameter list (POST action method) *@
-<form asp-action="AddLanguage" method="post">
-	<div class="form-group">
-		<label>Person: </label>
-		<select name="IdOfPerson" asp-items="ViewBag.People" class="form-control"></select>
-	</div>
-	<div class="form-group">
-		<label>Language: </label>
-		<select name="IdOfLanguage" asp-items="ViewBag.Languages" class="form-control"></select>
-	</div>
-	<input type="submit" value="Add a Language" class="btn btn-primary" />
+<form asp-controller="Language" asp-action="AddLanguage" method="post" class="form-control">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />    
+    <input type="submit" value="Add a Language" class="btn btn-primary"/>
 </form>
-

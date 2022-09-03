@@ -54,11 +54,17 @@
                     <a asp-controller="Language" asp-action="RetrieveLanguageDB">Languages (DB)</a>
                 </li>
                 <li>
-                    <a asp-controller="Language" asp-action="DisplayPeopleLanguages">List People Languages (DB)</a>
+                    <a asp-controller="Person" asp-action="DisplayPeopleLanguages">List People Languages (DB)</a>
                 </li>
                 <li>
-                    <a asp-controller="Language" asp-action="AddLanguage">Add language (DB)</a>
-                </li> 
+                    <a asp-controller="Person" asp-action="AddLanguageSkillToPerson">Add a language to person</a>
+                </li>
+                <li>
+                    <a asp-controller="Language" asp-action="AddLanguage">Add a language (DB)</a>
+                </li>
+                <li>
+                    <a asp-controller="Country" asp-action="AddACountryToDB">Add a Country (DB)</a>
+                </li>
             </ul>
         </nav>           
     </header>

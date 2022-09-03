@@ -8,6 +8,11 @@
 
 <h3>Data from a CountryViewModel</h3>
 
+@if(ViewBag.StatusNewCountry != null)
+{
+    <h3>Status: @ViewBag.StatusNewCountry</h3>
+}
+
 <table>
     <tr>
         <th>Id Of Country</th>
