@@ -8,6 +8,11 @@
 
 <h3>Data from a CityViewModel</h3>
 
+@if(ViewBag.StatusNewCity != null)
+{
+    <h3>Status: @ViewBag.StatusNewCity</h3>
+}
+
 <table>
     <tr>
         <th>Id Of City</th>

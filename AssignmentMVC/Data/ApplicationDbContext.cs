@@ -96,7 +96,7 @@ namespace AssignmentMVC.Data
                 new Person { IdPerson = 3, FullName = "Donald Trumph", PhoneNumber = "011-222222", City_Id = 6 },
                 new Person { IdPerson = 4, FullName = "Vladimir Putin", PhoneNumber = "007-3333333", City_Id = 4 },
                 new Person { IdPerson = 5, FullName = "Helge Skoog", PhoneNumber = "033-2178328", City_Id = 1 },
-                new Person { IdPerson = 6, FullName = "Diego Maradona", PhoneNumber = "0054-444444", City_Id = 4 }
+                new Person { IdPerson = 6, FullName = "Diego Maradona", PhoneNumber = "0054-444444", City_Id = 10 }
                 );
 
             //Adding Languages

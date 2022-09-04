@@ -30,6 +30,20 @@ namespace AssignmentMVC.Controllers
             //return View();
         }
 
+        //UN-Implemented
+        //Adds a person to DB
+        public IActionResult AddPersonToDB() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        //UN-Implemented
+        //Adds a person to DB
+        public IActionResult AddPersonToDB(Person person)
+        {
+            return View();
+        }
 
         //Retrieves the data from the DB
         public IActionResult RetrievePeopleDB()

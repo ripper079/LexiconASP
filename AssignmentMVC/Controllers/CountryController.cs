@@ -45,15 +45,16 @@ namespace AssignmentMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Make a check that a country doesn't already exist(Languages objects)
+                //Make a check that a country doesn't already exist (Country objects)
                 var listOfCountriesFromDB = _context.Contries.ToList();
                 List<string> allPresentCountryNames = new List<string>();
 
-                //Populate all countryies
+                //Populate all countries
                 foreach (var aCountry in listOfCountriesFromDB) 
                 {
                     allPresentCountryNames.Add(aCountry.CountryName);
                 }
+
 
                 //Doesnt contain the language
                 if (! allPresentCountryNames.Contains(country.CountryName))
