@@ -5,4 +5,29 @@
 
 <h1>AddPersonToDB</h1>
 <h1>Needs To Be implemented</h1>
+<h1>Add a Person</h1>
+
+
+
+@* Make sure that 'name' property of select element matches corresponding  parameter list (POST action method) *@
+<form asp-controller="Person" asp-action="AddPersonToDB" method="post">
+	<div class="form-group">
+		<label>Full Name: </label>
+		<input type="text" name="FullNameOfPerson" class="form-control"/>
+	</div>
+	<div class="form-group">
+		<label>Phone number: </label>
+		<input type="text" name="PhoneNumberOfPerson" class="form-control"/>
+	</div>
+
+	<div class="form-group">
+		<label>City</label>
+		<select name="IdOfCity" asp-items="ViewBag.Cities" class="form-control"></select>
+	</div>
+
+	<input type="submit" value="ADD" class="btn btn-primary"/>
+</form>
+
+
+
 

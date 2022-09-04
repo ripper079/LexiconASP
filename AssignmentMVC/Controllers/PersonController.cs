@@ -34,15 +34,55 @@ namespace AssignmentMVC.Controllers
         //Adds a person to DB
         public IActionResult AddPersonToDB() 
         {
+            ViewBag.Cities = new SelectList(_context.Cities, "Id", "CityName");
+
             return View();
         }
 
         [HttpPost]
         //UN-Implemented
         //Adds a person to DB
-        public IActionResult AddPersonToDB(Person person)
+        public IActionResult AddPersonToDB(string FullNameOfPerson, string PhoneNumberOfPerson, int IdOfCity)
         {
-            return View();
+
+
+            if (ModelState.IsValid)
+            {
+
+                //Make a check that a city already exists in DB - City objects
+                var listOfPeopleFromDB = _context.People.ToList();
+                List<string> allPresentPersonNames = new List<string>();
+
+                //Populate all person names names
+                foreach (var aPerson in listOfPeopleFromDB)
+                {
+                    allPresentPersonNames.Add(aPerson.FullName);
+                }
+
+                //Doesnt contain the person name
+                if (! allPresentPersonNames.Contains(FullNameOfPerson))
+                {
+                    //Create a City to DB
+                    var userCreateAPersony = new Person { FullName = FullNameOfPerson, PhoneNumber = PhoneNumberOfPerson, City_Id=IdOfCity};
+
+                    _context.People.Add(userCreateAPersony);
+                    _context.SaveChanges();
+                    ViewBag.StatusNewPerson = $"Success - Add Person - The Person '{FullNameOfPerson}' was added";
+                }
+                else
+                {
+                    ViewBag.StatusNewPerson = $"Failure - Add PErson - The Person '{FullNameOfPerson}' already exists";
+                }
+            }
+            else
+            {
+                ViewBag.StatusNewPerson = $"Error: Missing/Invalid input in 'Person form'";
+            }
+
+            //Create List from DB
+            var updatedListOfPeopleFromDB = _context.People.ToList();
+
+            return View("RetrievePeopleDB", updatedListOfPeopleFromDB);
         }
 
         //Retrieves the data from the DB
