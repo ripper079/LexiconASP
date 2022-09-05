@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "RemovePersonFromDB";
+}
+
+<h1>RemovePersonFromDB</h1>
+
+
+@* Make sure that 'name' property of select element matches corresponding  parameter list (POST action method) *@
+<form asp-controller="Person" asp-action="RemovePersonFromDB" method="post">
+	<div class="form-group">
+		<label>Person</label>
+		<select name="IdOfPerson" asp-items="ViewBag.Person" class="form-control"></select>
+	</div>
+
+	<input type="submit" value="REMOVE" class="btn btn-danger"/>
+</form>
+
+

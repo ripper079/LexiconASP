@@ -30,7 +30,44 @@ namespace AssignmentMVC.Controllers
             //return View();
         }
 
-        //UN-Implemented
+
+        public IActionResult RemovePersonFromDB() 
+        {
+            ViewBag.Person = new SelectList(_context.People, "IdPerson", "FullName");
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RemovePersonFromDB(int IdOfPerson)
+        {
+            if (ModelState.IsValid) 
+            {
+                var personToDelete = _context.People.FirstOrDefault(aPeople => aPeople.IdPerson == IdOfPerson);
+                if (personToDelete == null)
+                {
+                    ViewBag.StatusDeletePerson = $"Failure - Delete Person - Can NOT delete non-existing the person";
+                }
+                else 
+                {
+                    ViewBag.StatusDeletePerson = $"Success - Delete Person - The Person '{personToDelete.FullName}' was deleted";
+                    _context.People.Remove(personToDelete);
+                    _context.SaveChanges();
+                }
+            }
+            else
+            {
+                ViewBag.StatusDeletePerson = $"Error: Missing/Invalid input in 'Person delete form'";
+            }
+
+
+            //Create List from DB
+            var listOfPeopleFromDB = _context.People.ToList();
+
+            return View("RetrievePeopleDB", listOfPeopleFromDB);
+
+        }
+
         //Adds a person to DB
         public IActionResult AddPersonToDB() 
         {
@@ -40,11 +77,9 @@ namespace AssignmentMVC.Controllers
         }
 
         [HttpPost]
-        //UN-Implemented
         //Adds a person to DB
         public IActionResult AddPersonToDB(string FullNameOfPerson, string PhoneNumberOfPerson, int IdOfCity)
         {
-
 
             if (ModelState.IsValid)
             {

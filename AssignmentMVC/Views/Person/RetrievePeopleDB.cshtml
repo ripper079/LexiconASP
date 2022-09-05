@@ -7,9 +7,16 @@
 
 <h1>RetrievePeopleDB - Display Content in People Database</h1>
 
+
+@* Print status for a specfic action *@
 @if(ViewBag.StatusNewPerson != null)
 {
     <h3>Status: @ViewBag.StatusNewPerson</h3>
+}
+
+@if(ViewBag.StatusDeletePerson != null)
+{
+    <h3>Status: @ViewBag.StatusDeletePerson</h3>
 }
 
 <table>
