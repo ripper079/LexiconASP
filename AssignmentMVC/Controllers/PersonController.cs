@@ -22,6 +22,8 @@ namespace AssignmentMVC.Controllers
         }
 
 
+        //ALL edit function may be prospect for removal and view to
+        /*
         public IActionResult Index()
         {
             return NotFound("Custom Simulated 404 Not Found Page - In [PersonController] on [Index()] action");     //"Custom page"
@@ -37,6 +39,10 @@ namespace AssignmentMVC.Controllers
             return View();
         }
 
+
+
+        
+        //Lets user pick a person to edit
         [HttpPost]
         public IActionResult EditChooseAPerson(int IdOfPersonToEdit)
         {
@@ -56,6 +62,7 @@ namespace AssignmentMVC.Controllers
                 else
                 {
                     ViewBag.PersonToEditInfo = $"The user to '{personToEdit.IdPerson}  {personToEdit.FullName} with PhoneNumber {personToEdit.PhoneNumber}' edit ";
+                    RedirectToAction("EditDisplayForm", IdOfPersonToEdit);
                 }
             }
             else 
@@ -63,13 +70,33 @@ namespace AssignmentMVC.Controllers
                 ViewBag.StatusEditPerson = $"Error: Missing/Invalid input in 'Person edit form'";
             }
 
-            return View("RetrievePeopleDB", _context.People.ToList());
+            //return View("RetrievePeopleDB", _context.People.ToList());
+            RedirectToAction("EditDisplayForm", IdOfPersonToEdit);
         }
 
-        public IActionResult EditDisplayForm() 
+        //Enter the new updated (edited) User
+        public IActionResult EditDisplayForm(int idOfPersonToEdit) 
         {
             return View();
         }
+
+        //Here the edit get performed in DB
+        [HttpPost]
+        public IActionResult EditDisplayForm(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            else
+            {
+
+            }
+
+                return View();
+        }
+
+        */
 
 
         public IActionResult RemovePersonFromDB() 

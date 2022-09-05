@@ -10,9 +10,7 @@ namespace AssignmentMVC.Models
 
         public string CountryName { get; set; } = "";
 
-        //Navigation Properties
-        //This creates a foreign keyy....WTF magic...
-        //Relationship between Countries and Cities
+        //Navigation Properties - Relationship between Countries and Cities (This creates a foreign key)        
         public List<City> Cities { get; set; } = new List<City>();
 
     }

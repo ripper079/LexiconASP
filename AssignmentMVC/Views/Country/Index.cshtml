@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Country>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if(ViewBag.StatusNewCountry != null)
+{
+    <h4>Status: @ViewBag.StatusNewCountry</h4>
+}
+
+@if(ViewBag.StatusCountryEdited != null)
+{
+    <h4>Status: @ViewBag.StatusCountryEdited</h4>
+}
+
+
+@if(ViewBag.StatusCountryDeleted != null)
+{
+    <h4>Status: @ViewBag.StatusCountryDeleted</h4>
+}
+
+<h1>Basic CRUD for Countries</h1>
+
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create a country</a>
+</p>
+
+
+@* Use bootstrap :D :D :D *@
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Country Id</th>
+            <th>Country Name</th>
+            <th></th> @* Edit *@            
+            <th></th> @* Delete *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aCountry in Model)
+        {
+            <tr>
+                <td>@aCountry.Id</td>
+                <td>@aCountry.CountryName</td>
+                <td>                    
+                    <a asp-action="Edit" asp-route-id=@aCountry.Id>EDIT</a>
+                    <a asp-action="Delete" asp-route-id=@aCountry.Id>DELETE</a>
+                    @*<a asp-action="Delete" asp-route-snn="@aCountry.Id">DELETE</a>*@
+                    @* 44:50*@
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@* Jonathan går igen detta 33 min i video *_090622*@

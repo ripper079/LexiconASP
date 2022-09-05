@@ -1,0 +1,19 @@
+﻿@model Country
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit the Country - @ViewBag.NameOfCountryToEdit</h1>
+
+
+<form asp-action="Edit" method="post">    
+    <label asp-for="CountryName">Name of Country</label>
+    <input asp-for="CountryName" />
+
+    <input type="submit" value="Edit" class="btn btn-primary"/>
+
+</form>
+
+
+

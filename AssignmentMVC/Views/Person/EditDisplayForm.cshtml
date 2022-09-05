@@ -1,0 +1,27 @@
+﻿@model Person;
+
+@{
+    ViewData["Title"] = "EditDisplayForm";
+}
+
+<h1>EditDisplayForm</h1>
+
+
+<form asp-controller="Person" asp-action="EditDisplayForm" method="post" class="form-control">
+    <label asp-for="IdPerson"></label>
+    <input asp-for="IdPerson" readonly="readonly"/>
+
+    <label asp-for="FullName">Enter new Full Name</label>
+    <input asp-for="FullName" />    
+
+    <label asp-for="PhoneNumber">Enter new PhoneNumber</label>
+    <input asp-for="PhoneNumber" />    
+
+    <label asp-for="City_Id">Cify IDIDIDI</label>
+    <input asp-for="City_Id"  readonly="readonly"/>
+
+    <label asp-for="CityOfPerson">Person person</label>
+    <input asp-for="CityOfPerson"  readonly="readonly"/>
+
+    <input type="submit" value="Edit" class="btn btn-primary"/>
+</form>
