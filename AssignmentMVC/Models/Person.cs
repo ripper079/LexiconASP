@@ -13,7 +13,8 @@ namespace AssignmentMVC.Models
         //public string City { get; set; }
 
         //Relationships to Cities
-        public int? City_Id { get; set; }
+        //public int? City_Id { get; set; }
+        public int City_Id { get; set; }
         //[Required]
         [ForeignKey("City_Id")]
         public City CityOfPerson { get; set; }

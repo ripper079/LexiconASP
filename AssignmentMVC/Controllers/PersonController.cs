@@ -30,6 +30,47 @@ namespace AssignmentMVC.Controllers
             //return View();
         }
 
+        public IActionResult EditChooseAPerson() 
+        {
+            ViewBag.Person = new SelectList(_context.People, "IdPerson", "FullName");
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditChooseAPerson(int IdOfPersonToEdit)
+        {
+
+            if (ModelState.IsValid) 
+            {
+                //Get details about person
+                var personToEdit = _context.People.FirstOrDefault(aPeople => aPeople.IdPerson == IdOfPersonToEdit);
+
+                if (personToEdit == null) 
+                {
+                    ViewBag.StatusEditPerson = $"Failure - Edit Person - Can NOT edit non-existing the person";
+
+                    //Display all people
+                    return View("RetrievePeopleDB", _context.People.ToList());
+                }
+                else
+                {
+                    ViewBag.PersonToEditInfo = $"The user to '{personToEdit.IdPerson}  {personToEdit.FullName} with PhoneNumber {personToEdit.PhoneNumber}' edit ";
+                }
+            }
+            else 
+            {
+                ViewBag.StatusEditPerson = $"Error: Missing/Invalid input in 'Person edit form'";
+            }
+
+            return View("RetrievePeopleDB", _context.People.ToList());
+        }
+
+        public IActionResult EditDisplayForm() 
+        {
+            return View();
+        }
+
 
         public IActionResult RemovePersonFromDB() 
         {
