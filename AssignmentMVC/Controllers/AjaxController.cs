@@ -50,43 +50,50 @@ namespace AssignmentMVC.Controllers
             return PartialView("_ListPersonsWithoutId", myPeopleView);
         }
 
-        [HttpPost]
-        public IActionResult GetOnePersons(int id)
-        {
-            //Create a filtered list of ONE person based original viewmodel
-            var filteredPeople = myPeopleView.listOfPersons.Where
-                (aPeople => aPeople.IdPerson == id).ToList();
 
-            //Create a new filtered viewmodel
-            var filteredViewModel = new PeopleViewModel();
-            //Set the filtered view 
-            filteredViewModel.listOfPersons = filteredPeople;
+        ////Prospect removal
+        //[HttpPost]
+        //public IActionResult GetOnePersons(int id)
+        //{
+        //    //Create a filtered list of ONE person based original viewmodel
+        //    var filteredPeople = myPeopleView.listOfPersons.Where
+        //        (aPeople => aPeople.IdPerson == id).ToList();
 
-            return PartialView("_ListPersonsWithoutId", filteredViewModel);
-        }
+        //    //Create a new filtered viewmodel
+        //    var filteredViewModel = new PeopleViewModel();
+        //    //Set the filtered view 
+        //    filteredViewModel.listOfPersons = filteredPeople;
 
-        [HttpPost]
-        public string RemovePerson(int id)
-        {
-            if (IsPersonValid(id)) {
-                myPeopleView.removePersonFromList(id);
-                return "The person with id" + id + " was deleted";
-            }
+        //    return PartialView("_ListPersonsWithoutId", filteredViewModel);
+        //}
 
-            return "No person removed. Id was incorrect";
-        }
+        ////Prospect removal
+        //[HttpPost]
+        //public string RemovePerson(int id)
+        //{
+        //    if (IsPersonValid(id)) {
+        //        myPeopleView.removePersonFromList(id);
+        //        return "The person with id" + id + " was deleted";
+        //    }
 
-        private bool IsPersonValid(int prospectId) 
-        {
-            foreach(var item in myPeopleView.listOfPersons)
-            {
-                if (item.IdPerson == prospectId) 
-                {
-                    return true;
-                }
-            }
-            return false;
+        //    return "No person removed. Id was incorrect";
+        //}
+
+        ////Prospect removal
+        //private bool IsPersonValid(int prospectId) 
+        //{
+        //    foreach(var item in myPeopleView.listOfPersons)
+        //    {
+        //        if (item.IdPerson == prospectId) 
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
             
-        }
+        //}
+
+
+
     }
 }

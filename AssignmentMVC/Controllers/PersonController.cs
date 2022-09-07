@@ -296,26 +296,28 @@ namespace AssignmentMVC.Controllers
         }
 
 
-        //Adds (if possible) a person
-        [HttpPost]
-        public IActionResult Person(PeopleViewModel pPeopleViewModel)
-        {
-            if (ModelState.IsValid) 
-            {
-                myPeopleViewModel.addPersonToList(
-                    pPeopleViewModel.cpvm.FullName, pPeopleViewModel.cpvm.PhoneNumber, pPeopleViewModel.cpvm.City, IDForPeople++
-                );
-            }
-            
-            return View(myPeopleViewModel);
-        }
-       
 
-        public IActionResult RemovePerson(int id) 
-        {
-            myPeopleViewModel.removePersonFromList(id);
-            return View("Person", myPeopleViewModel);
-        }
+        ////Prospect removal
+        ////Adds (if possible) a person
+        //[HttpPost]
+        //public IActionResult Person(PeopleViewModel pPeopleViewModel)
+        //{
+        //    if (ModelState.IsValid) 
+        //    {
+        //        myPeopleViewModel.addPersonToList(
+        //            pPeopleViewModel.cpvm.FullName, pPeopleViewModel.cpvm.PhoneNumber, pPeopleViewModel.cpvm.City, IDForPeople++
+        //        );
+        //    }
+            
+        //    return View(myPeopleViewModel);
+        //}
+
+        ////Prospect removal
+        //public IActionResult RemovePerson(int id) 
+        //{
+        //    myPeopleViewModel.removePersonFromList(id);
+        //    return View("Person", myPeopleViewModel);
+        //}
 
 
 
