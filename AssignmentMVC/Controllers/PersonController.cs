@@ -318,33 +318,37 @@ namespace AssignmentMVC.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult Filter(string filtertext) 
-        {
-            //Restore original viewmodel
-            if (string.IsNullOrEmpty(filtertext))
-            {
-                return View("Person", myPeopleViewModel);
-            }
+
+        //Prospect removal
+        //[HttpPost]
+        //public IActionResult Filter(string filtertext) 
+        //{
+        //    //Restore original viewmodel
+        //    if (string.IsNullOrEmpty(filtertext))
+        //    {
+        //        return View("Person", myPeopleViewModel);
+        //    }
             
-            return View("Person", CreateFilteredViewModel(filtertext));
-        }
+        //    return View("Person", CreateFilteredViewModel(filtertext));
+        //}
 
 
-        //Creates a new Filtered View Model base in filterText
-        private PeopleViewModel CreateFilteredViewModel(string filterText) 
-        {
-            //Create a filtered list based original viewmodel
-            var filteredPeople = myPeopleViewModel.listOfPersons.Where
-                (aPeople => aPeople.FullName == filterText || aPeople.CityOfPerson.CityName == filterText).ToList();
 
-            //Create a new filtered viewmodel
-            var filteredViewModel = new PeopleViewModel();
-            //Set the filtered view 
-            filteredViewModel.listOfPersons = filteredPeople;
+        ////Prospect removal
+        ////Creates a new Filtered View Model base in filterText
+        //private PeopleViewModel CreateFilteredViewModel(string filterText) 
+        //{
+        //    //Create a filtered list based original viewmodel
+        //    var filteredPeople = myPeopleViewModel.listOfPersons.Where
+        //        (aPeople => aPeople.FullName == filterText || aPeople.CityOfPerson.CityName == filterText).ToList();
 
-            return filteredViewModel;
-        }
+        //    //Create a new filtered viewmodel
+        //    var filteredViewModel = new PeopleViewModel();
+        //    //Set the filtered view 
+        //    filteredViewModel.listOfPersons = filteredPeople;
+
+        //    return filteredViewModel;
+        //}
 
 
 
