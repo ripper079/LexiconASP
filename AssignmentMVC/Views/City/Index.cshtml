@@ -1,0 +1,53 @@
+﻿@model IEnumerable<City>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Basic CRUD for Cities</h1>
+
+@if (ViewBag.StatusNewCity != null)
+{
+    <h3>Status: @ViewBag.StatusNewCity</h3>    
+}
+
+@if (ViewBag.StatusDeletedCity != null)
+{
+    <h3>Status: @ViewBag.StatusDeletedCity</h3>
+}
+
+
+<p>
+    <a asp-controller="City" asp-action="Create" class="btn btn-primary">Create a City</a>
+</p>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id City</th>
+            <th>City Name</th>
+            <th>Country Id</th>
+            <th></th> @* Edit *@            
+            <th></th> @* Details *@       
+            <th></th> @* Delete *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aCity in Model)
+        {
+            <tr>
+                <td>@aCity.Id</td>
+                <td>@aCity.CityName</td>
+                <td>@aCity.Country_Id</td>
+                <td>                    
+                    <a asp-action="Edit" asp-route-id=@aCity.Id class="btn btn-primary">EDIT</a>
+                    <a asp-action="Details" asp-route-id=@aCity.Id class="btn btn-success">DETAILS</a>
+                    <a asp-action="Delete" asp-route-id=@aCity.Id class="btn btn-danger">DELETE</a>                                        
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

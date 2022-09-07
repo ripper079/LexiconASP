@@ -1,27 +1,17 @@
-﻿namespace AssignmentMVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AssignmentMVC.Models
 {
     public class CountryViewModel
     {
-        public List<Country> listOfCountries;
+        //public List<Country> listOfCountries;
+        //public List<Country> listOfCountries = new List<Country>();
 
-        public CountryViewModel()
-        {
-            listOfCountries = new List<Country>();
-        }
+        public int Id { get; set; }
 
-        //Helper function
-        public bool isIdPresent(int prospectId)
-        {
-            foreach (Country aCountry in listOfCountries)
-            {
-                //if (aCountry.IdCountry == prospectId)
-                if (aCountry.Id == prospectId)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        [Required]
+        [Display(Name = "ENTER the name of the country")]
+        public string CountryName { get; set; }
 
     }
 }

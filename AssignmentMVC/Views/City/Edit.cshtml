@@ -1,0 +1,58 @@
+﻿@* @model City *@
+@model CityViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>EEEEdit the City '@ViewBag.NameOfCityToEdit'</h1>
+
+<form asp-controller="City" asp-action="Edit" method="post" class="form-control">
+	<div asp-validation-summary="All"></div>
+
+	<div class="form-group">
+		<label asp-for="Id"></label>
+		<input asp-for="Id" readonly="readonly" class="form-control" />
+	</div>
+
+	<div class="form-group">
+		<label asp-for="CityName"></label>
+		<input asp-for="CityName" class="form-control" />
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Country_Id">Country: </label>
+		<select asp-for="Country_Id" asp-items="ViewBag.Countries" class="form-control"></select>
+	</div>
+
+	<input type="submit" value="Edit" class="btn btn-primary"/>
+
+</form>
+
+
+
+
+
+
+@*
+<form asp-action="Edit" method="post" class="form-control">
+	
+	<div class="form-group" >
+		<label asp-for="CityName">Name the City</label>
+		<input asp-for="CityName" class="form-control" />
+	</div>
+	
+	<div class="form-group">
+		<label asp-for="Id">Id of City</label>  
+		<input asp-for="Id" readonly="readonly" class="form-control" />
+	</div>
+			
+	<div class="form-group">		
+		<label asp-for="Country_Id">Country: </label>
+		<select asp-for="Country_Id" asp-items="ViewBag.Countries" class="form-control"></select>
+	</div>
+
+    <input type="submit" value="Edit" class="btn btn-primary"/>
+</form>
+
+*@

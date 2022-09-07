@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AssignmentMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220905104329_seedtables")]
+    [Migration("20220906140504_seedtables")]
     partial class seedtables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

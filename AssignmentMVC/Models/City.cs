@@ -14,7 +14,7 @@ namespace AssignmentMVC.Models
 
         //Navigation properties and relationships
         //Relationship to Countries
-        public int Country_Id { get; set; } //Make it nullable to allow field contain NULL
+        public int Country_Id { get; set; } 
         //[Required]
         [ForeignKey("Country_Id")]
         public Country Country { get; set; }
