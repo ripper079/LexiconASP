@@ -9,8 +9,7 @@ namespace AssignmentMVC.Models
 
         public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "ENTER the name of the country")]
+        [Required]        
         public string CountryName { get; set; }
 
     }

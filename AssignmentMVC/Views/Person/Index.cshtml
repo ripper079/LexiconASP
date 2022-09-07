@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Person>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>BASIC CRUD for People</h1>
+
+<p>
+    <a asp-controller="Person" asp-action="Create" class="btn btn-primary">Create a person</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id of Person</th>
+            <th>Fullname</th>
+            <th>Phonenumber</th>
+            <th>City_ID</th>
+            <th></th> @* Edit *@            
+            <th></th> @* Details *@       
+            <th></th> @* Delete *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aPerson in Model)
+        {
+            <tr>
+                <td>@aPerson.IdPerson</td>
+                <td>@aPerson.FullName</td>
+                <td>@aPerson.PhoneNumber</td>
+                <td>@aPerson.City_Id</td>
+                <td>                    
+                    <a asp-action="Edit" asp-route-id=@aPerson.IdPerson class="btn btn-primary">EDIT</a>
+                    <a asp-action="Details" asp-route-id=@aPerson.IdPerson class="btn btn-success">DETAILS</a>
+                    <a asp-action="Delete" asp-route-id=@aPerson.IdPerson class="btn btn-danger">DELETE</a>                                        
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -20,6 +20,8 @@
 *@
 
 <form asp-controller="Country" asp-action="Create" method="post" class="form-control">
+    <div asp-validation-summary="All"></div>
+
     <div class="form-group">
         <label asp-for="CountryName"></label>
         <input asp-for="CountryName" class="form-control" />

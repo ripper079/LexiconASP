@@ -21,17 +21,97 @@ namespace AssignmentMVC.Controllers
             _context = context;
         }
 
-
-        //ALL edit function may be prospect for removal and view to
-        /*
+         
         public IActionResult Index()
         {
-            return NotFound("Custom Simulated 404 Not Found Page - In [PersonController] on [Index()] action");     //"Custom page"
-
-            //return NotFound();                                                                              //"Standard" custom - Returns a HTTP ERROR 404
-            //return View();
+            return View(_context.People.ToList());
         }
 
+        public IActionResult Create() 
+        {
+            PersonViewModel myPersonViewModel = new PersonViewModel();
+
+            //Limit the option to countries in DB
+            ViewBag.Cities = new SelectList(_context.Cities, "Id", "CityName");
+            return View(myPersonViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(PersonViewModel myPersonViewModel) 
+        {
+            if (ModelState.IsValid) 
+            {
+                //Create a new person
+                Person aNewPerson = new Person
+                {
+                    FullName = myPersonViewModel.FullName,
+                    PhoneNumber = myPersonViewModel.PhoneNumber,
+                    City_Id = myPersonViewModel.City_Id                    
+                };
+
+                _context.People.Add(aNewPerson);
+                _context.SaveChanges();
+                //Display updated view
+                return RedirectToAction("Index");
+            }
+
+            //SelectList gives an error
+            ViewBag.Cities = new SelectList(_context.Cities, "Id", "CityName");
+            return View(myPersonViewModel);
+        }
+
+        public IActionResult Edit(int id) 
+        {
+            Person personToEdit = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
+
+            PersonViewModel myPersonViewModel = new PersonViewModel();
+
+            myPersonViewModel.IdPerson = id;
+            myPersonViewModel.FullName = personToEdit.FullName;
+            myPersonViewModel.PhoneNumber = personToEdit.PhoneNumber;
+            myPersonViewModel.City_Id = personToEdit.City_Id;
+
+            ViewBag.Cities = new SelectList(_context.Cities, "Id", "CityName");
+            return View(myPersonViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(PersonViewModel myPersonViewModel) 
+        {
+            if (ModelState.IsValid) 
+            {
+                //Edit the person
+                //Create a new person
+                Person editAPerson = new Person
+                {
+                    IdPerson = myPersonViewModel.IdPerson,
+                    FullName = myPersonViewModel.FullName,
+                    PhoneNumber = myPersonViewModel.PhoneNumber,
+                    City_Id = myPersonViewModel.City_Id
+                };
+
+                _context.Update(editAPerson);
+                _context.SaveChanges();
+                //Display updated view
+                return RedirectToAction("Index");
+            }
+
+            //Prevent the SelectList of being empty and crash
+            ViewBag.Cities = new SelectList(_context.Cities, "Id", "CityName");
+            return View(myPersonViewModel);
+        }
+
+        public IActionResult Delete(int id) 
+        {
+            var thePersonToDelete = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
+            
+            _context.People.Remove(thePersonToDelete);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        /*
         public IActionResult EditChooseAPerson() 
         {
             ViewBag.Person = new SelectList(_context.People, "IdPerson", "FullName");
@@ -296,61 +376,55 @@ namespace AssignmentMVC.Controllers
         }
 
 
-
-        ////Prospect removal
-        ////Adds (if possible) a person
-        //[HttpPost]
-        //public IActionResult Person(PeopleViewModel pPeopleViewModel)
-        //{
-        //    if (ModelState.IsValid) 
-        //    {
-        //        myPeopleViewModel.addPersonToList(
-        //            pPeopleViewModel.cpvm.FullName, pPeopleViewModel.cpvm.PhoneNumber, pPeopleViewModel.cpvm.City, IDForPeople++
-        //        );
-        //    }
+        //Adds (if possible) a person
+        [HttpPost]
+        public IActionResult Person(PeopleViewModel pPeopleViewModel)
+        {
+            if (ModelState.IsValid) 
+            {
+                myPeopleViewModel.addPersonToList(
+                    pPeopleViewModel.cpvm.FullName, pPeopleViewModel.cpvm.PhoneNumber, pPeopleViewModel.cpvm.City, IDForPeople++
+                );
+            }
             
-        //    return View(myPeopleViewModel);
-        //}
+            return View(myPeopleViewModel);
+        }
+       
 
-        ////Prospect removal
-        //public IActionResult RemovePerson(int id) 
-        //{
-        //    myPeopleViewModel.removePersonFromList(id);
-        //    return View("Person", myPeopleViewModel);
-        //}
+        public IActionResult RemovePerson(int id) 
+        {
+            myPeopleViewModel.removePersonFromList(id);
+            return View("Person", myPeopleViewModel);
+        }
 
 
-
-        //Prospect removal
-        //[HttpPost]
-        //public IActionResult Filter(string filtertext) 
-        //{
-        //    //Restore original viewmodel
-        //    if (string.IsNullOrEmpty(filtertext))
-        //    {
-        //        return View("Person", myPeopleViewModel);
-        //    }
+        [HttpPost]
+        public IActionResult Filter(string filtertext) 
+        {
+            //Restore original viewmodel
+            if (string.IsNullOrEmpty(filtertext))
+            {
+                return View("Person", myPeopleViewModel);
+            }
             
-        //    return View("Person", CreateFilteredViewModel(filtertext));
-        //}
+            return View("Person", CreateFilteredViewModel(filtertext));
+        }
 
 
+        //Creates a new Filtered View Model base in filterText
+        private PeopleViewModel CreateFilteredViewModel(string filterText) 
+        {
+            //Create a filtered list based original viewmodel
+            var filteredPeople = myPeopleViewModel.listOfPersons.Where
+                (aPeople => aPeople.FullName == filterText || aPeople.CityOfPerson.CityName == filterText).ToList();
 
-        ////Prospect removal
-        ////Creates a new Filtered View Model base in filterText
-        //private PeopleViewModel CreateFilteredViewModel(string filterText) 
-        //{
-        //    //Create a filtered list based original viewmodel
-        //    var filteredPeople = myPeopleViewModel.listOfPersons.Where
-        //        (aPeople => aPeople.FullName == filterText || aPeople.CityOfPerson.CityName == filterText).ToList();
+            //Create a new filtered viewmodel
+            var filteredViewModel = new PeopleViewModel();
+            //Set the filtered view 
+            filteredViewModel.listOfPersons = filteredPeople;
 
-        //    //Create a new filtered viewmodel
-        //    var filteredViewModel = new PeopleViewModel();
-        //    //Set the filtered view 
-        //    filteredViewModel.listOfPersons = filteredPeople;
-
-        //    return filteredViewModel;
-        //}
+            return filteredViewModel;
+        }
 
 
 

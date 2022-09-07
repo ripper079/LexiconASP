@@ -20,7 +20,66 @@ namespace AssignmentMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Languages.ToList());
+        }
+
+        public IActionResult Create() 
+        {
+            LanguageViewModel myLanguageViewModel = new LanguageViewModel();
+
+            return View(myLanguageViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(LanguageViewModel myLanguageViewModel)
+        {
+            if (ModelState.IsValid) 
+            {
+                //Create a new language
+                Language aNewLanguage = new Language 
+                {
+                    Name = myLanguageViewModel.Name
+                };
+
+                _context.Languages.Add(aNewLanguage);
+                _context.SaveChanges();
+                //Display updated model
+                return RedirectToAction("Index");
+            }
+
+            return View(myLanguageViewModel);
+        }
+
+        public IActionResult Edit(int id) 
+        {
+            Language languageToEdit = _context.Languages.FirstOrDefault(aLanguage => aLanguage.Id == id);
+
+            LanguageViewModel myLanguageViewModel = new LanguageViewModel();
+
+            myLanguageViewModel.Id = id;
+            myLanguageViewModel.Name = languageToEdit.Name;
+
+            return View(myLanguageViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(LanguageViewModel myLanguageViewModel) 
+        {
+            if (ModelState.IsValid) 
+            {
+                Language editALanguage = new Language 
+                {
+                    Id = myLanguageViewModel.Id,
+                    Name = myLanguageViewModel.Name
+                };
+
+                _context.Update(editALanguage);
+                _context.SaveChanges();
+                //Display updated view
+                return RedirectToAction("Index");
+            }            
+
+            return View(myLanguageViewModel);
         }
 
 

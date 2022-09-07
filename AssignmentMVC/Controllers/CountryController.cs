@@ -82,7 +82,7 @@ namespace AssignmentMVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            //Redirect to form with error validation
+            
             return View(myCountryViewModel);
         }
 

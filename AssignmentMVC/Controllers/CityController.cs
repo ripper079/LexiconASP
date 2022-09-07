@@ -51,6 +51,8 @@ namespace AssignmentMVC.Controllers
 
             }
 
+            //Prevent empty field when returning back
+            ViewBag.Countries = new SelectList(_context.Contries, "Id", "CountryName");
             return View(myCityViewModel);
         }
 
@@ -91,6 +93,7 @@ namespace AssignmentMVC.Controllers
             }
 
             //Enter again valid data
+            ViewBag.Countries = new SelectList(_context.Contries, "Id", "CountryName");
             return View(myCityViewModel);
         }
 
@@ -205,19 +208,19 @@ namespace AssignmentMVC.Controllers
 
         //public IActionResult RetrieveCitiesFromDB()
         //{
-        //    //Create a viewModel based on DB content            
-        //    //Create Cities from DB - A list
+        //    Create a viewModel based on DB content
+        //    Create Cities from DB - A list
         //    var listOfCitiesFromDB = _context.Cities.ToList();
 
-        //    //Create a city view model
+        //    Create a city view model
         //    var myCityViewModel = new CityViewModel();
 
-        //    //Set view model to that list
+        //    Set view model to that list
         //    myCityViewModel.listOfCities = listOfCitiesFromDB;
 
         //    return View(myCityViewModel);
 
-        //    //return View();
+        //    return View();
         //}
 
 
@@ -235,7 +238,7 @@ namespace AssignmentMVC.Controllers
         //{
         //    if (ModelState.IsValid)
         //    {
-                
+
         //        //Make a check that a city already exists in DB - City objects
         //        var listOfCitiesFromDB = _context.Cities.ToList();
         //        List<string> allPresentCityNames = new List<string>();

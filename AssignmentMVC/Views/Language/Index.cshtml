@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Language>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Basic CRUD for Languages</h1>
+
+<p>
+    <a asp-controller="Language" asp-action="Create" class="btn btn-primary">Create a Language</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id of Language</th>
+            <th>Name of Language</th>
+            <th></th> @* Edit *@
+            <th></th> @* Delete *@
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var aLanguage in Model)
+        {
+            <tr>            
+                <td>@aLanguage.Id</td>
+                <td>@aLanguage.Name</td>
+                <td>
+                    <a asp-controller="Language" asp-action="Edit" asp-route-id=@aLanguage.Id class="btn btn-success">EDIT</a>
+                    <a asp-controller="Language" asp-action="Delete" asp-route-id=@aLanguage.Id class="btn btn-danger">DELETE</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

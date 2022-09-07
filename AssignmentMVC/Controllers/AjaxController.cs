@@ -50,50 +50,43 @@ namespace AssignmentMVC.Controllers
             return PartialView("_ListPersonsWithoutId", myPeopleView);
         }
 
+        [HttpPost]
+        public IActionResult GetOnePersons(int id)
+        {
+            //Create a filtered list of ONE person based original viewmodel
+            var filteredPeople = myPeopleView.listOfPersons.Where
+                (aPeople => aPeople.IdPerson == id).ToList();
 
-        ////Prospect removal
-        //[HttpPost]
-        //public IActionResult GetOnePersons(int id)
-        //{
-        //    //Create a filtered list of ONE person based original viewmodel
-        //    var filteredPeople = myPeopleView.listOfPersons.Where
-        //        (aPeople => aPeople.IdPerson == id).ToList();
+            //Create a new filtered viewmodel
+            var filteredViewModel = new PeopleViewModel();
+            //Set the filtered view 
+            filteredViewModel.listOfPersons = filteredPeople;
 
-        //    //Create a new filtered viewmodel
-        //    var filteredViewModel = new PeopleViewModel();
-        //    //Set the filtered view 
-        //    filteredViewModel.listOfPersons = filteredPeople;
+            return PartialView("_ListPersonsWithoutId", filteredViewModel);
+        }
 
-        //    return PartialView("_ListPersonsWithoutId", filteredViewModel);
-        //}
+        [HttpPost]
+        public string RemovePerson(int id)
+        {
+            if (IsPersonValid(id)) {
+                myPeopleView.removePersonFromList(id);
+                return "The person with id" + id + " was deleted";
+            }
 
-        ////Prospect removal
-        //[HttpPost]
-        //public string RemovePerson(int id)
-        //{
-        //    if (IsPersonValid(id)) {
-        //        myPeopleView.removePersonFromList(id);
-        //        return "The person with id" + id + " was deleted";
-        //    }
+            return "No person removed. Id was incorrect";
+        }
 
-        //    return "No person removed. Id was incorrect";
-        //}
-
-        ////Prospect removal
-        //private bool IsPersonValid(int prospectId) 
-        //{
-        //    foreach(var item in myPeopleView.listOfPersons)
-        //    {
-        //        if (item.IdPerson == prospectId) 
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
+        private bool IsPersonValid(int prospectId) 
+        {
+            foreach(var item in myPeopleView.listOfPersons)
+            {
+                if (item.IdPerson == prospectId) 
+                {
+                    return true;
+                }
+            }
+            return false;
             
-        //}
-
-
-
+        }
     }
 }

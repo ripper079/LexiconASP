@@ -13,7 +13,7 @@
         <h1>Logo</h1>                 
         <nav>
             <ul>
-                @*            
+                @*           
                 <li>
                     <a asp-controller="Home" asp-action="Aboutmeperson">About me</a>
                 </li>
@@ -35,9 +35,7 @@
                 </li>
                 <li>
                     <a asp-controller="Ajax" asp-action="Index">Ajax</a>
-                </li>  
-                
-
+                </li>                  
                 <li>
                     <a asp-controller="Person" asp-action="LINQSearchPeople">LINQ (DB)</a>
                 </li>                
@@ -59,9 +57,7 @@
                 <li>
                     <a asp-controller="Person" asp-action="AddLanguageSkillToPerson">Add a language to person</a>
                 </li>
-                <li>
-                    <a asp-controller="Language" asp-action="AddLanguage">Add a language (DB)</a>
-                </li>
+                
                 <li>
                     <a asp-controller="Country" asp-action="AddACountryToDB">Add a Country (DB)</a>
                 </li>
@@ -74,12 +70,24 @@
                 <li>
                     <a asp-controller="Person" asp-action="RemovePersonFromDB">Remove a Person (DB)</a>
                 </li>
+                                
+                
+                <li>
+                    <a asp-controller="Language" asp-action="AddLanguage">Add a language (DB)</a>
+                </li>
                 *@
+
                 <li>
                     <a asp-controller="Country" asp-action="Index">Country CRUD</a>
                 </li>
                 <li>
                     <a asp-controller="City" asp-action="Index">City CRUD</a>
+                </li>
+                <li>
+                    <a asp-controller="Person" asp-action="Index">People CRUD</a>
+                </li>
+                <li>
+                    <a asp-controller="Language" asp-action="Index">Language CRUD</a>
                 </li>
                 
             </ul>
