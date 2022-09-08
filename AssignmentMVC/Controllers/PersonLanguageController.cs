@@ -30,13 +30,11 @@ namespace AssignmentMVC.Controllers
         //The C in CRUD [id is the id for person]
         //Creates a new language to a person
         public IActionResult Create(int id) 
-        {
-            ViewBag.Languages = new SelectList(_context.Languages, "Id", "Name");
-            
+        {                        
             Person aPersonToAddLanguageSkill = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
 
-            //?? Maybe a Viewbag will be enough
-            return View(aPersonToAddLanguageSkill);
+            ViewBag.Languages = new SelectList(_context.Languages, "Id", "Name");
+            return View(aPersonToAddLanguageSkill);  //?? Maybe a Viewbag will be enough 
         }
 
 
@@ -82,6 +80,45 @@ namespace AssignmentMVC.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+        //The D in CRUD [id is the id for person]
+        //
+        public IActionResult Delete(int id) 
+        {
+            //Get the Person
+            Person aPersonsLanguageSkillDelete = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
+            //Join the tables to populate langues for aPersonsLanguageSkillDelete
+            List<Person> people = _context.People.Include(aPersonsLanguageSkillDelete => aPersonsLanguageSkillDelete.Languages).ToList();
+
+            //The person all know languages
+            var allKnowLanguages = aPersonsLanguageSkillDelete.Languages.ToList();
+
+            //Limit languages option to persons actual language skills
+            ViewBag.Languages = new SelectList(allKnowLanguages, "Id", "Name");
+
+            //Illiterate
+            if (aPersonsLanguageSkillDelete.Languages.Count == 0)
+            {
+                return RedirectToAction("Index");
+            }   
+
+            return View(aPersonsLanguageSkillDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int IdOfLanguage, int IdOfPerson) 
+        {            
+            Person myPerson = _context.People.Single(aPerson => aPerson.IdPerson == IdOfPerson);
+            Language myLanguage = _context.Languages.Include(langP => langP.People).Single(langI => langI.Id == IdOfLanguage);            
+
+            Console.WriteLine("After remove but not store");
+
+            myLanguage.People.Remove(myLanguage.People.Where(prospectPerson => prospectPerson.IdPerson == myPerson.IdPerson).FirstOrDefault());
+            _context.SaveChanges();
+
+            
+            return RedirectToAction("Index");
         }
 
     }

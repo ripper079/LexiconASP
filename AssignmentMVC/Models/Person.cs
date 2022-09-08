@@ -20,11 +20,6 @@ namespace AssignmentMVC.Models
         public City CityOfPerson { get; set; }
 
 
-        //Relationships to PeopleLanguages
-        /*
-        public List<PersonLanguage> PeopleLanguages { get; set; } = new List<PersonLanguage>();
-        */
-
         //Relationships Languages
         public List<Language> Languages { get; set; } = new List<Language>();
 

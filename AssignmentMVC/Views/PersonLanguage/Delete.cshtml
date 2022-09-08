@@ -1,0 +1,24 @@
+﻿@model Person
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h1>Remove (Delete) a language from Person - '@Model.FullName'</h1>
+
+@* Make sure that name property of select element matches corresponding  parameter list (POST action method) *@
+<form asp-controller="PersonLanguage" asp-action="Delete" method="post" class="form-control">
+	
+	<div class="form-group">
+		<label>Language: </label>
+		<select name="IdOfLanguage" asp-items="ViewBag.Languages" class="form-control"></select>
+	</div>
+
+	<div class="form-group">
+		<input type="hidden" name="IdOfPerson" value=@Model.IdPerson />
+	</div>
+	
+	<input type="submit" value="Delete Language" class="btn btn-danger" />
+</form>
+

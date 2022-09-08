@@ -5,7 +5,7 @@
     string allLanguages = "";
 }
 
-<h1>Display people all languages skills - Joining Table - CRUD</h1>
+<h1>Display people all languages skills - [Invisible]Joining Table - CRUD</h1>
 
 @if(ViewBag.LanguageStatus != null)
 {
@@ -40,11 +40,8 @@
                     <a asp-controller="PersonLanguage" asp-action="Create" asp-route-id=@aPerson.IdPerson class="btn btn-primary">Add Language</a>
                     <a asp-controller="PersonLanguage" asp-action="Delete" asp-route-id=@aPerson.IdPerson class="btn btn-danger">Remove Language</a>
                 </td>
-
             </tr>
-        }
-        
-
+        }        
     </tbody>
 </table>
 
