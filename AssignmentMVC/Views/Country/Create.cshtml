@@ -7,17 +7,6 @@
 }
 
 <h1>Create a New Country</h1>
-@*
-
-<form asp-action="Create" method="post">    
-    <label asp-for="CountryName">Name of Country</label>
-    <input asp-for="CountryName" />
-
-    <input type="submit" value="CREATE" class="btn btn-primary" />
-
-</form>
-
-*@
 
 <form asp-controller="Country" asp-action="Create" method="post" class="form-control">
     <div asp-validation-summary="All"></div>
@@ -29,3 +18,4 @@
 
     <input type="submit" value="Add a CoUNTry" class="btn btn-primary"/>
 </form>
+
