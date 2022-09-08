@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Person>
+
+@{
+    ViewData["Title"] = "Index";
+    string allLanguages = "";
+}
+
+<h1>Display people all languages skills - Joining Table - CRUD</h1>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Person Full name</th>
+            <th>Language</th>
+            <th></th> @* Edit *@            
+            <th></th> @* Delete *@
+        </tr>
+    </thead>
+
+    <tbody>
+        @* Iterate throuth all persons *@
+        @foreach(var aPerson in Model)
+        {
+            allLanguages = "";
+            <tr>
+                <td>@aPerson.FullName</td>
+                @* Iterate through all langagues that a person have and build string*@
+                @foreach (var aLanguage in aPerson.Languages)
+                {
+                    allLanguages += aLanguage.Name + " ";
+                }
+                <td>@allLanguages</td>
+                <td>
+                    <a asp-controller="PersonLanguage" asp-action="Create" asp-route-id=@aPerson.IdPerson class="btn btn-primary">Add Language</a>
+                    <a asp-controller="PersonLanguage" asp-action="Delete" asp-route-id=@aPerson.IdPerson class="btn btn-primary">Remove Language</a>
+                </td>
+
+            </tr>
+        }
+        
+
+    </tbody>
+</table>
+
+
