@@ -25,21 +25,26 @@
 }
 
 
-<table>
-    <tr>
-        <th>Id of Person</th>
-        <th>FullName</th>
-        <th>Phone Number</th>
-        <th>City_Id</th>        
-    </tr>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id of Person</th>
+            <th>FullName</th>
+            <th>Phone Number</th>
+            <th>City_Id</th>        
+        </tr>
+    </thead>
 
-@foreach (var aPerson in Model)
-{
-    <tr>
-        <td>@aPerson.IdPerson</td>
-        <td>@aPerson.FullName</td>
-        <td>@aPerson.PhoneNumber</td>
-        <td>@aPerson.City_Id</td>
-    </tr> 
-}
+    <tbody>
+        @foreach (var aPerson in Model)
+        {
+            <tr>
+                <td>@aPerson.IdPerson</td>
+                <td>@aPerson.FullName</td>
+                <td>@aPerson.PhoneNumber</td>
+                <td>@aPerson.City_Id</td>
+            </tr> 
+        }
+    </tbody>
+
 </table>

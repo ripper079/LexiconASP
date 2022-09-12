@@ -25,6 +25,14 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
                                                     .AddRoles<IdentityRole>()
                                                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
+
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+//                                .AddDefaultTokenProviders()
+//                                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
 //Custom config for identity
 builder.Services.Configure<IdentityOptions>(options =>
 {

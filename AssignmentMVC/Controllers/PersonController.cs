@@ -4,9 +4,11 @@ using AssignmentMVC.Data;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssignmentMVC.Controllers
 {
+    [Authorize]
     public class PersonController : Controller
     {        
         public static PeopleViewModel myPeopleViewModel = new PeopleViewModel();
@@ -269,6 +271,7 @@ namespace AssignmentMVC.Controllers
         }
 
         //Retrieves the data from the DB
+        [AllowAnonymous]
         public IActionResult RetrievePeopleDB()
         {
           
