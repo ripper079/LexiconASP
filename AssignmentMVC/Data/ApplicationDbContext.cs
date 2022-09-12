@@ -1,9 +1,11 @@
 ﻿using AssignmentMVC.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssignmentMVC.Data
 {
-    public class ApplicationDbContext : DbContext
+    //public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         /* Required for migration */
         public ApplicationDbContext()
