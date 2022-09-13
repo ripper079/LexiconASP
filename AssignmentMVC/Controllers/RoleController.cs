@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AssignmentMVC.Models;
 using AssignmentMVC.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text;
 
 namespace AssignmentMVC.Controllers
 {
@@ -116,13 +117,39 @@ namespace AssignmentMVC.Controllers
         public IActionResult ListUsers()
         {
             var allRegistratedUsers = _userManager.Users;
+
+
             return View(allRegistratedUsers);
         }
 
         [HttpGet]
         public async Task<IActionResult> AddRoleToUser(string id) 
         {
+            //The user
             var theUserToAddARole = await _userManager.FindByIdAsync(id);
+            //Get all roles
+            var allAvailibleRoles = _roleManager.Roles;
+
+            List<string> allStringRoles = new List<string>();
+            StringBuilder userCurrentRoles = new StringBuilder();
+
+            //Create string for displaying currentRoles
+            // P.S There is already an open DataReader associated with this Connection which must be closed first error occurs if try 
+            //if (await _userManager.IsInRoleAsync(theUserToAddARole, aStringRole)) in this below foreach...
+            foreach (var role in allAvailibleRoles)
+            {
+                allStringRoles.Add(role.Name); 
+            }
+
+            //Workaround
+            foreach (var aStringRole in allStringRoles)
+            {
+                if (await _userManager.IsInRoleAsync(theUserToAddARole, aStringRole))
+                {
+                    userCurrentRoles.Append(aStringRole);
+                    userCurrentRoles.Append(" ");
+                }
+            }
 
             UserRoleViewModel myUserRoleViewModel = new UserRoleViewModel();
 
@@ -134,37 +161,136 @@ namespace AssignmentMVC.Controllers
 
 
             ViewBag.ListOfRoles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name");
+            ViewBag.CurrentRoles = userCurrentRoles.ToString();
 
             return View(myUserRoleViewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddRoleToUser(UserRoleViewModel myUserRoleViewModel) 
-        {
-            //The user
+        {            
             var user = await _userManager.FindByIdAsync(myUserRoleViewModel.UserId);
-            
-            string roleName = myUserRoleViewModel.RoleName;
-            
-            //No role exist
-            if (string.IsNullOrEmpty(roleName))
+            string roleNameToAdd = myUserRoleViewModel.RoleName;
+
+            if (ModelState.IsValid) 
             {
-                RedirectToAction("index");
-            }
-            else
-            {
-                //Only add if user is NOT a member in the role already
-                if (! (await _userManager.IsInRoleAsync(user, myUserRoleViewModel.RoleName)))
+                if (string.IsNullOrEmpty(roleNameToAdd))
                 {
-                    Console.WriteLine($"The user {user.FirstName} {user.LastName} was added to role {roleName}");
-                    await _userManager.AddToRoleAsync(user, myUserRoleViewModel.RoleName);
-                    
+                    RedirectToAction("index", "role");
                 }
-                
+                else
+                {
+                    //Check that user doesnt already have this role
+                    if (! (await _userManager.IsInRoleAsync(user, roleNameToAdd)))
+                    {
+                        await _userManager.AddToRoleAsync(user, myUserRoleViewModel.RoleName);
+                        ViewBag.RoleAddedForUser = $"Success: The user {user.FirstName} {user.LastName} was added to role '{roleNameToAdd}'";
+                    }
+                    else
+                    {
+                        ViewBag.RoleAddedForUser = $"Failure: The user {user.FirstName} {user.LastName} has already the role '{roleNameToAdd}'";
+                    }
+
+                    return View("ListUsers", _userManager.Users);
+
+                }
+
+            }
+            
+            //Enter Valid data again
+            ViewBag.ListOfRoles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name");
+            return View(myUserRoleViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteRoleFromUser(string id) 
+        {
+
+            //The user
+            var theUserToRemoveARole = await _userManager.FindByIdAsync(id);
+            //Get all roles
+            var allAvailibleRoles = _roleManager.Roles;
+
+            //If no roles then redirect 
+            if (allAvailibleRoles.Count() == 0) 
+            {
+                return View("ListUsers", _userManager.Users);
+            }
+            
+            List<string> allStringRoles = new List<string>();
+            StringBuilder userCurrentRoles = new StringBuilder();
+
+            //Create string for displaying currentRoles
+            // P.S There is already an open DataReader associated with this Connection which must be closed first error occurs if try 
+            //if (await _userManager.IsInRoleAsync(theUserToAddARole, aStringRole)) in this below foreach...
+            foreach (var role in allAvailibleRoles)
+            {
+                allStringRoles.Add(role.Name);
             }
 
-            return View("ListUsers", _userManager.Users);
-            //return View(myUserRoleViewModel);
+            //Workaround
+            foreach (var aStringRole in allStringRoles)
+            {
+                if (await _userManager.IsInRoleAsync(theUserToRemoveARole, aStringRole))
+                {
+                    userCurrentRoles.Append(aStringRole);
+                    userCurrentRoles.Append(" ");
+                }
+            }
+
+            UserRoleViewModel myUserRoleViewModel = new UserRoleViewModel();
+
+            myUserRoleViewModel.UserId = theUserToRemoveARole.Id;
+            myUserRoleViewModel.UserName = theUserToRemoveARole.UserName;
+            myUserRoleViewModel.FirstName = theUserToRemoveARole.FirstName;
+            myUserRoleViewModel.LastName = theUserToRemoveARole.LastName;
+            myUserRoleViewModel.Email = theUserToRemoveARole.Email;
+
+
+            ViewBag.ListOfRoles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name");
+            ViewBag.CurrentRoles = userCurrentRoles.ToString();
+
+            return View(myUserRoleViewModel);
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRoleFromUser(UserRoleViewModel myUserRoleViewModel) 
+        {
+
+            var user = await _userManager.FindByIdAsync(myUserRoleViewModel.UserId);
+            string roleNameToDelete = myUserRoleViewModel.RoleName;
+
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(roleNameToDelete))
+                {
+                    RedirectToAction("index", "role");
+                }
+                else
+                {
+                    //Check that user doesnt already have this role
+                    if (await _userManager.IsInRoleAsync(user, roleNameToDelete))
+                    {
+                        await _userManager.RemoveFromRoleAsync(user, myUserRoleViewModel.RoleName);
+                        ViewBag.RoleDeletedForUser = $"Success: The role '{roleNameToDelete}' was removed from {user.FirstName} {user.LastName}";
+                    }
+                    else
+                    {
+                        ViewBag.RoleDeletedForUser = $"Failure: The role '{roleNameToDelete}' doesny exist for {user.FirstName} {user.LastName}";
+                    }
+
+                    return View("ListUsers", _userManager.Users);
+
+                }
+
+            }
+
+            //Enter Valid data again
+            ViewBag.ListOfRoles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name");
+            return View(myUserRoleViewModel);
+
         }
 
     }

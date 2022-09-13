@@ -1,14 +1,15 @@
 ﻿@model UserRoleViewModel
 
 @{
-    ViewData["Title"] = "AddRoleToUser";
+    ViewData["Title"] = "DeleteRoleFromUser";
 }
 
-<h1>Add Role To User</h1>
+
+<h1>Delete Role To User</h1>
 
 <h3>Current Roles for user is: @ViewBag.CurrentRoles</h3>
 
-<form asp-controller="Role" asp-action="AddRoleToUser" method="post" class="form-control">
+<form asp-controller="Role" asp-action="DeleteRoleFromUser" method="post" class="form-control">
 
     <div asp-validation-summary="All"></div>
 
@@ -36,7 +37,6 @@
         <label asp-for="Email"></label>
         <input asp-for="Email" readonly="readonly" class="form-control" />
     </div>
-
    
 
     <div class="form-group">
@@ -44,10 +44,8 @@
         <select asp-for="RoleName" asp-items="ViewBag.ListOfRoles" class="form-control"></select>
     </div>
 
-    <input type="submit" value="Add Role" class="btn btn-success" />
+    <input type="submit" value="Delete Role" class="btn btn-success" />
 
 </form>
-
-
 
 

@@ -4,6 +4,11 @@
     ViewData["Title"] = "ListUsers";
 }
 
+@if (ViewBag.RoleAddedForUser != null || ViewBag.RoleDeletedForUser != null)
+{
+    <h4>@ViewBag.RoleAddedForUser @ViewBag.RoleDeletedForUser</h4>
+}
+
 <h1>List ALL Registrated Users</h1>
 
 
@@ -14,7 +19,8 @@
 
     <thead>
         <tr>
-            <th>ID</th>
+            <th>ID (user account)</th>
+            <th>UserName</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Birth Date</th>
@@ -30,10 +36,11 @@
         {
             <tr>
                 <td>@aUser.Id</td>
+                <td>@aUser.UserName</td>
                 <td>@aUser.FirstName</td>
                 <td>@aUser.LastName</td>
                 <td>@aUser.BirthDate</td>
-                <td>@aUser.Email</td>
+                <td>@aUser.Email</td>                
                 <td>
                     <a asp-controller="Role" asp-action="AddRoleToUser" asp-route-id=@aUser.Id class="btn btn-primary">Add Role to User</a>
                     <a asp-controller="Role" asp-action="DeleteRoleFromUser" asp-route-id=@aUser.Id class="btn btn-danger">Remove Role to User</a>
