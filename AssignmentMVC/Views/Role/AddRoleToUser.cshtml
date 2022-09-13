@@ -1,0 +1,51 @@
+﻿@model UserRoleViewModel
+
+@{
+    ViewData["Title"] = "AddRoleToUser";
+}
+
+<h1>AddRoleToUser</h1>
+
+<form asp-controller="Role" asp-action="AddRoleToUser" method="post" class="form-control">
+
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="UserId"></label>
+        <input asp-for="UserId" readonly="readonly" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" readonly="readonly" class="form-control" />
+    </div>
+   
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" readonly="readonly" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" readonly="readonly" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" readonly="readonly" class="form-control" />
+    </div>
+
+   
+
+    <div class="form-group">
+        <label asp-for="RoleName"></label>
+        <select asp-for="RoleName" asp-items="ViewBag.ListOfRoles" class="form-control"></select>
+    </div>
+
+    <input type="submit" value="Add Role" class="btn btn-success" />
+
+</form>
+
+
+
+

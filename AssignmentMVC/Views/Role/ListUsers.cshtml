@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "ListUsers";
+}
+
+<h1>List ALL Registrated Users</h1>
+
+
+
+@if (Model.Any())
+{
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Birth Date</th>
+            <th>E-Mail</th>
+            <th></th> @* Add *@            
+            <th></th> @* Delete *@
+        </tr>        
+    </thead>
+
+    <tbody>
+        @* Iterate throgh all Application users *@
+        @foreach (var aUser in Model)
+        {
+            <tr>
+                <td>@aUser.Id</td>
+                <td>@aUser.FirstName</td>
+                <td>@aUser.LastName</td>
+                <td>@aUser.BirthDate</td>
+                <td>@aUser.Email</td>
+                <td>
+                    <a asp-controller="Role" asp-action="AddRoleToUser" asp-route-id=@aUser.Id class="btn btn-primary">Add Role to User</a>
+                    <a asp-controller="Role" asp-action="DeleteRoleFromUser" asp-route-id=@aUser.Id class="btn btn-danger">Remove Role to User</a>
+                </td>
+            </tr>    
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <p>No Roles defined</p>
+}

@@ -270,8 +270,7 @@ namespace AssignmentMVC.Controllers
             return View("RetrievePeopleDB", updatedListOfPeopleFromDB);
         }
 
-        //Retrieves the data from the DB
-        [AllowAnonymous]
+        //Retrieves the data from the DB        
         public IActionResult RetrievePeopleDB()
         {
           
