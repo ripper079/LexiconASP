@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "All Roles";
+}
+
+<h1>Basic CRUD for Roles</h1>
+
+<p>
+    <a asp-controller="Role" asp-action="Create" class="btn btn-primary">Create a Role</a>
+</p>
+
+@if (Model.Any())
+{
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Role Id</th>
+            <th>Role Name</th>
+            <th></th> @* Edit *@            
+            <th></th> @* Delete *@
+        </tr>        
+    </thead>
+
+    <tbody>
+        @* Iterate throgh all Roles *@
+        @foreach (var aRole in Model)
+        {
+            <tr>
+                <td>@aRole.Id</td>
+                <td>@aRole.Name</td>
+
+                <td>
+                    <a asp-controller="Role" asp-action="Edit" asp-route-id=@aRole.Id class="btn btn-primary">Edit Role</a>
+                    <a asp-controller="Role" asp-action="Delete" asp-route-id=@aRole.Id class="btn btn-danger">Remove Role</a>
+                </td>
+            </tr>    
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <p>No Roles defined</p>
+}
