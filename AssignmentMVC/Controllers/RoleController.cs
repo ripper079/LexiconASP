@@ -4,9 +4,11 @@ using AssignmentMVC.Models;
 using AssignmentMVC.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssignmentMVC.Controllers
 {
+    [Authorize(Roles = "Admin, Moderator")]
     public class RoleController : Controller
     {
         readonly RoleManager<IdentityRole> _roleManager;
@@ -70,6 +72,8 @@ namespace AssignmentMVC.Controllers
             if (roleToEdit == null)
             {
                 RedirectToAction("Index");
+                
+                //return View("Index");
             }
 
             var myEditRoleViewModel = new EditRoleViewModel
@@ -95,7 +99,7 @@ namespace AssignmentMVC.Controllers
             {
                 roleToEdit.Name = myEditRoleViewModel.RoleName;
                 IdentityResult result = await _roleManager.UpdateAsync(roleToEdit);
-
+                
                 //Check if entry is made to the database
                 if (result.Succeeded)
                 {
@@ -111,6 +115,47 @@ namespace AssignmentMVC.Controllers
             }
 
             return View(myEditRoleViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            //The id will always be valid and role to
+            var roleToDelete = await _roleManager.FindByIdAsync(id);
+            
+            var myDeleteRoleViewModel = new DeleteRoleViewModel
+            {
+                Id = roleToDelete.Id,
+                RoleName = roleToDelete.Name
+            };
+
+            return View(myDeleteRoleViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(DeleteRoleViewModel myDeleteRoleViewModel) 
+        {
+
+            var roleToDelete = await _roleManager.FindByIdAsync(myDeleteRoleViewModel.Id);
+
+            roleToDelete.Name = myDeleteRoleViewModel.RoleName;
+
+            IdentityResult result = await _roleManager.DeleteAsync(roleToDelete);
+
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("index");                
+
+            }
+
+            //Add the error to the ModelState - key is empty
+            foreach (IdentityError anError in result.Errors)
+            {
+                ModelState.AddModelError("", anError.Description);
+            }
+
+            return View(myDeleteRoleViewModel);
         }
 
 
@@ -258,7 +303,6 @@ namespace AssignmentMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRoleFromUser(UserRoleViewModel myUserRoleViewModel) 
         {
-
             var user = await _userManager.FindByIdAsync(myUserRoleViewModel.UserId);
             string roleNameToDelete = myUserRoleViewModel.RoleName;
 

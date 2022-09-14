@@ -134,6 +134,9 @@ namespace AssignmentMVC.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    //Start - Daniel added code here
+                    await _userManager.AddToRoleAsync(user, "User");
+                    //End - Daniel added code here 
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

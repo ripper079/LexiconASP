@@ -23,12 +23,13 @@ namespace AssignmentMVC.Controllers
             _context = context;
         }
 
-         
+        [Authorize(Roles = "User, Moderator, Admin")]
         public IActionResult Index()
         {
             return View(_context.People.ToList());
         }
 
+        [Authorize(Roles = "User, Moderator, Admin")]
         public IActionResult Create() 
         {
             PersonViewModel myPersonViewModel = new PersonViewModel();
@@ -38,6 +39,7 @@ namespace AssignmentMVC.Controllers
             return View(myPersonViewModel);
         }
 
+        [Authorize(Roles = "User, Moderator, Admin")]
         [HttpPost]
         public IActionResult Create(PersonViewModel myPersonViewModel) 
         {
@@ -62,6 +64,7 @@ namespace AssignmentMVC.Controllers
             return View(myPersonViewModel);
         }
 
+        [Authorize(Roles = "User, Moderator, Admin")]
         public IActionResult Edit(int id) 
         {
             Person personToEdit = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
@@ -77,6 +80,7 @@ namespace AssignmentMVC.Controllers
             return View(myPersonViewModel);
         }
 
+        [Authorize(Roles = "User, Moderator, Admin")]
         [HttpPost]
         public IActionResult Edit(PersonViewModel myPersonViewModel) 
         {
@@ -103,6 +107,7 @@ namespace AssignmentMVC.Controllers
             return View(myPersonViewModel);
         }
 
+        [Authorize(Roles = "Moderator, Admin")]
         public IActionResult Delete(int id) 
         {
             var thePersonToDelete = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
@@ -180,7 +185,8 @@ namespace AssignmentMVC.Controllers
 
         */
 
-
+        //Backward compatibilty may break
+        [Authorize(Roles = "Admin")]
         public IActionResult RemovePersonFromDB() 
         {
             ViewBag.Person = new SelectList(_context.People, "IdPerson", "FullName");
@@ -188,6 +194,8 @@ namespace AssignmentMVC.Controllers
             return View();
         }
 
+        //Backward compatibilty may break
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult RemovePersonFromDB(int IdOfPerson)
         {
@@ -270,7 +278,8 @@ namespace AssignmentMVC.Controllers
             return View("RetrievePeopleDB", updatedListOfPeopleFromDB);
         }
 
-        //Retrieves the data from the DB        
+        //Retrieves the data from the DB
+        [Authorize(Roles ="User, Moderator, Admin, FreeUser")]
         public IActionResult RetrievePeopleDB()
         {
           
@@ -287,7 +296,8 @@ namespace AssignmentMVC.Controllers
             return View(people);
         }
 
-
+        //Backward compatibilty may break
+        [Authorize(Roles = "Admin")]
         public IActionResult LINQSearchPeople()
         {
             //Reference
@@ -326,7 +336,8 @@ namespace AssignmentMVC.Controllers
             return View(myPeopleViewModel);           
         }
 
-
+        //Backward compatibilty may break
+        [Authorize(Roles = "Admin")]
         public IActionResult AddLanguageSkillToPerson() 
         {
             ViewBag.People = new SelectList(_context.People, "IdPerson", "FullName");
@@ -336,6 +347,8 @@ namespace AssignmentMVC.Controllers
         }
 
         //Adds a language to the DB
+        //Backward compatibilty may break
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AddLanguageSkillToPerson(int IdOfPerson, int IdOfLanguage)
         {
@@ -391,8 +404,9 @@ namespace AssignmentMVC.Controllers
             
             return View(myPeopleViewModel);
         }
-       
 
+        //Backward compatibilty may break
+        [Authorize(Roles = "Admin")]
         public IActionResult RemovePerson(int id) 
         {
             myPeopleViewModel.removePersonFromList(id);
@@ -400,6 +414,8 @@ namespace AssignmentMVC.Controllers
         }
 
 
+        //Backward compatibilty may break
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Filter(string filtertext) 
         {

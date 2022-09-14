@@ -4,9 +4,11 @@ using AssignmentMVC.Data;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssignmentMVC.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CityController : Controller
     {
 

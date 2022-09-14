@@ -1,9 +1,11 @@
 ﻿using AssignmentMVC.Data;
 using AssignmentMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssignmentMVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CountryController : Controller
     {
         /*private*/

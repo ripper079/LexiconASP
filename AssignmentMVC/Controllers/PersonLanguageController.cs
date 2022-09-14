@@ -5,9 +5,11 @@ using AssignmentMVC.Data;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssignmentMVC.Controllers
 {
+    [Authorize]
     public class PersonLanguageController : Controller
     {
         /*private*/
@@ -19,6 +21,7 @@ namespace AssignmentMVC.Controllers
         }
 
         //The R in CRUD
+        [Authorize(Roles = "User, Moderator, Admin")]
         public IActionResult Index()
         {
             //A list of people with an optional list of languages
@@ -26,9 +29,10 @@ namespace AssignmentMVC.Controllers
 
             return View(peopleLanguageSkills);
         }
-        
+
         //The C in CRUD [id is the id for person]
         //Creates a new language to a person
+        [Authorize(Roles = "User, Moderator, Admin")]
         public IActionResult Create(int id) 
         {                        
             Person aPersonToAddLanguageSkill = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
@@ -41,6 +45,7 @@ namespace AssignmentMVC.Controllers
 
         //Adds and validates that language should be added to person
         [HttpPost]
+        [Authorize(Roles = "User, Moderator, Admin")]
         public IActionResult Create(int IdOfLanguage, int IdOfPerson) 
         {
             List<Person> people = _context.People.Include(x => x.Languages).ToList();
@@ -84,6 +89,7 @@ namespace AssignmentMVC.Controllers
 
         //The D in CRUD [id is the id for person]
         //
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Delete(int id) 
         {
             //Get the Person
@@ -107,6 +113,7 @@ namespace AssignmentMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Delete(int IdOfLanguage, int IdOfPerson) 
         {            
             Person myPerson = _context.People.Single(aPerson => aPerson.IdPerson == IdOfPerson);

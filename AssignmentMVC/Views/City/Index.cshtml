@@ -29,7 +29,7 @@
             <th>City Name</th>
             <th>Country Id</th>
             <th></th> @* Edit *@            
-            <th></th> @* Details *@       
+            @*<th></th>*@ @* Details *@       
             <th></th> @* Delete *@
         </tr>
     </thead>
@@ -42,7 +42,7 @@
                 <td>@aCity.Country_Id</td>
                 <td>                    
                     <a asp-action="Edit" asp-route-id=@aCity.Id class="btn btn-primary">EDIT</a>
-                    <a asp-action="Details" asp-route-id=@aCity.Id class="btn btn-success">DETAILS</a>
+                    @*<a asp-action="Details" asp-route-id=@aCity.Id class="btn btn-success">DETAILS</a>*@
                     <a asp-action="Delete" asp-route-id=@aCity.Id class="btn btn-danger">DELETE</a>                                        
                 </td>
             </tr>
