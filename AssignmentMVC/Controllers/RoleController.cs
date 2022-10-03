@@ -71,9 +71,9 @@ namespace AssignmentMVC.Controllers
             //No role found
             if (roleToEdit == null)
             {
-                RedirectToAction("Index");
-                
-                //return View("Index");
+                //RedirectToAction("Index");
+                return RedirectToAction("Index");
+
             }
 
             var myEditRoleViewModel = new EditRoleViewModel
@@ -93,7 +93,8 @@ namespace AssignmentMVC.Controllers
             //No role found
             if (roleToEdit == null)
             {
-                RedirectToAction("Index");
+                //RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -221,7 +222,8 @@ namespace AssignmentMVC.Controllers
             {
                 if (string.IsNullOrEmpty(roleNameToAdd))
                 {
-                    RedirectToAction("index", "role");
+                    //RedirectToAction("index", "role");
+                    return RedirectToAction("index", "role");
                 }
                 else
                 {
@@ -310,7 +312,8 @@ namespace AssignmentMVC.Controllers
             {
                 if (string.IsNullOrEmpty(roleNameToDelete))
                 {
-                    RedirectToAction("index", "role");
+                    //RedirectToAction("index", "role");
+                    return RedirectToAction("index", "role");
                 }
                 else
                 {

@@ -74,31 +74,36 @@
                 </li>
                 *@
 
-                <li>
-                    <a asp-controller="Person" asp-action="RetrievePeopleDB">Retrieve Person Data (DB)</a>
-                </li>
+                @if(User.Identity.IsAuthenticated)
+                {
 
-                <li>
-                    <a asp-controller="Country" asp-action="Index">Country CRUD</a>
-                </li>
-                <li>
-                    <a asp-controller="City" asp-action="Index">City CRUD</a>
-                </li>
-                <li>
-                    <a asp-controller="Person" asp-action="Index">People CRUD</a>
-                </li>
-                <li>
-                    <a asp-controller="Language" asp-action="Index">Language CRUD</a>
-                </li>
-                <li>
-                    <a asp-controller="PersonLanguage" asp-action="Index">PersonLanguage CRUD</a>
-                </li>
-                <li>
-                    <a asp-controller="Role" asp-action="Index">Role CRUD</a>
-                </li>
-                <li>
-                    <a asp-controller="Role" asp-action="ListUsers">List Registrated Users</a>
-                </li>
+                    <li>
+                        <a asp-controller="Person" asp-action="RetrievePeopleDB">Retrieve Person Data (DB)</a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Country" asp-action="Index">Country CRUD</a>
+                    </li>
+                    <li>
+                        <a asp-controller="City" asp-action="Index">City CRUD</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Person" asp-action="Index">People CRUD</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Language" asp-action="Index">Language CRUD</a>
+                    </li>
+                    <li>
+                        <a asp-controller="PersonLanguage" asp-action="Index">PersonLanguage CRUD</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Role" asp-action="Index">Role CRUD</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Role" asp-action="ListUsers">List Registrated Users</a>
+                    </li>
+                }
+
                 <li>
                     <partial name="_LoginPartial" />
                 </li>
