@@ -5,8 +5,23 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Marko
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("*");
+        });
+});
+
+
+
 //Service mvc working
 builder.Services.AddMvc();
+
+
+
 
 //Enable Session support - Step 1
 builder.Services.AddSession(options => 
@@ -47,6 +62,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 //For identity support
 builder.Services.AddRazorPages();
 
+
+
 //The app
 var app = builder.Build();
 
@@ -58,6 +75,10 @@ app.UseStaticFiles();
 
 //Enable routing
 app.UseRouting();
+
+//Cors - MArko
+app.UseCors();
+
 
 //Authentication support - This code line BEFORE Authorization
 app.UseAuthentication();
