@@ -9,8 +9,7 @@ namespace AssignmentMVC.Models
         [Required]
         public string FullName { get; set; } = "";
         [Required]
-        public string PhoneNumber { get; set; } = "";
-        
+        public string PhoneNumber { get; set; } = "";        
         public int City_Id { get; set; }
     }
 }
