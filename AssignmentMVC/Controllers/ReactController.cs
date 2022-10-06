@@ -21,30 +21,7 @@ namespace AssignmentMVC.Controllers
         }
 
         
-        [Route("addapesontodb")]
-        [ProducesResponseType(200)]
-        [HttpPost]
-        //public string CreateAPerson(CreatePersonFrontEnd myCreateFE)
-        public ActionResult<Person> CreateAPerson(CreatePersonFrontEnd myCreateFE)
-        {
-            Console.WriteLine("Hit on CreateAPerson...");
-            var newPerson = new Person()
-            {
-                FullName = myCreateFE.FullName,
-                PhoneNumber = myCreateFE.PhoneNumber,
-                City_Id = myCreateFE.CityId
-
-            };
-
-            Console.WriteLine("-----------------------------------------------------------------------------");
-            Console.WriteLine($"Person created...FullName={newPerson.FullName} PhoneNumber={newPerson.PhoneNumber} CityId={newPerson.City_Id} ");
-
-            Response.StatusCode = 200;
-
-            return newPerson;
-
-
-        }
+        
 
         [Route("mockaviewmodel")]
         //[ProducesResponseType(200)]
@@ -188,5 +165,50 @@ namespace AssignmentMVC.Controllers
             return Ok(allCities);
         }
 
+        [Route("addapesontodb")]
+        [ProducesResponseType(200)]
+        [HttpPost]
+        //public ActionResult<Person> CreateAPerson(CreatePersonFrontEnd myCreateFE)
+        public async Task<ActionResult> CreateAPerson(CreatePersonFrontEnd myCreateFE)
+        {
+            Console.WriteLine("Hit on CreateAPerson...");
+            var newPerson = new Person()
+            {
+                FullName = myCreateFE.FullName,
+                PhoneNumber = myCreateFE.PhoneNumber,
+                City_Id = myCreateFE.CityId
+
+            };
+
+            Console.WriteLine("-----------------------------------------------------------------------------");
+            Console.WriteLine($"Person created...FullName={newPerson.FullName} PhoneNumber={newPerson.PhoneNumber} CityId={newPerson.City_Id} ");
+
+            Response.StatusCode = 200;
+
+            //return newPerson;
+
+            //Save to DB
+            _context.People.Add(newPerson);
+            await _context.SaveChangesAsync();
+
+            return Ok(newPerson);
+
+        }
+
+        [Route("deletepersonfromdb/{id}")]
+        [ProducesResponseType(200)]
+        [HttpDelete]
+        public async Task<ActionResult> DeleteAPerson(int id)
+        {
+            var thePersonToDelete = _context.People.FirstOrDefault(aPerson => aPerson.IdPerson == id);
+
+            Console.WriteLine("The pe");
+
+            _context.People.Remove(thePersonToDelete);
+            await _context.SaveChangesAsync();
+
+            return Ok(thePersonToDelete);
+
+        }
     }
 }
