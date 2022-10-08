@@ -21,5 +21,7 @@ namespace AssignmentMVC.Models
         //[Display(Name = "City ID")]
         //[Required]
         public int CityId { get; set; }
+
+        public int LanguageId { get; set; }
     }
 }
